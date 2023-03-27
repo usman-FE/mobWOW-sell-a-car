@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./dist/main.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+  <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> -->
+  <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
+
+  <title>mobWOW | Car Discovry</title>
+</head>
+
+<body>
+  <!-- MAIN CONTAINER START -->
+  <main class="h-full">
+    <!-- RED BOX -->
+    <div class="bg-[#ff0020] hidden lg:block fixed top-0 right-0 left-[97%] bottom-0"></div>
+    <!-- HEADER START -->
+    <header class="container mx-auto px-[15px] xl:max-w-[1200px]">
+      <!-- LOGO -->
+      <div class="py-8">
+        <a href="#" class="w-32 block">
+          <img src="images/mobWOW-Base-Logo-Red (2).svg" alt="Logo" title="Logo" class="w-full h-auto">
+        </a>
+      </div>
+    </header>
+    <!-- HEADER END -->
+    <!-- ONBOARDING SECTION START-->
+    <section class="container mx-auto px-[15px] xl:max-w-[1200px] pt-8" x-data="{
+        progress: 75,
+        showAddons: false,
+        colours: [
+          {
+            name: `I don't mind`,
+            bg: false,
+            id: 'none',
+            price: false
+          },
+          {
+            name: 'Pearl - Mangrove green',
+            bg: 'bg-[#b3d1d6]',
+            id: 'green',
+            price: 'Free'
+          },
+          {
+            name: 'Special solid paint - Atlas white',
+            bg: 'bg-[#b3b3b3]',
+            id: 'white',
+            price: 'RRP $300'
+          },
+          {
+            name: 'Metallic - Elemental brass',
+            bg: 'bg-[#dbd0c8]',
+            id: 'brass',
+            price: 'RRP $500'
+          },
+          {
+            name: 'Pearl - Aurora Grey',
+            bg: 'bg-[#465264]',
+            id: 'grey',
+            price: 'RRP $550'
+          },
+          {
+            name: 'Pearl - Dragon Red',
+            bg: 'bg-[#a61b2f]',
+            id: 'red',
+            price: 'RRP $550'
+          },
+          {
+            name: 'Metallic - Sleek silver',
+            bg: 'bg-[#cecece]',
+            id: 'silver',
+            price: 'RRP $550'
+          },
+          {
+            name: 'Pearl - Phantom black',
+            bg: 'bg-[#2b2b2b]',
+            id: 'black',
+            price: 'RRP $550'
+          },
+        ],
+        addons: [
+            {
+              title: 'trim',
+              isOpen: false,
+              options: [
+                {
+                  name: 'Cloth - Obsidian black/White stripe',
+                  id: 'stripe',
+                  price: '0$',
+                },
+                {
+                  name: 'LED',
+                  id: 'led',
+                  price: '100$',
+                }
+              ]
+            },
+            {
+              title: 'Modifications',
+              isOpen: false,
+              options: [
+                {
+                  name: 'Spoiler',
+                  id: 'spoiler',
+                  price: '0$',
+                },
+                {
+                  name: 'Speakers',
+                  id: 'speakers',
+                  price: '100$',
+                }
+              ]
+            }
+          ]
+      }">
+
+      <!-- BREADCRUMBS & PROGRESS -->
+      <div class="flex w-full md:max-w-[60%] justify-between">
+        <!-- BREADCRUMB -->
+        <a href="buy-deals-page.html"
+          class="capitalize inline-flex items-center underline text-gray-700 transition-all hover:text-[#ff0020]">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+              <path fill-rule="evenodd"
+                d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          <span class="text-base">back</span>
+        </a>
+        <!-- PROGRESS -->
+        <span class="text-base text-[#000000de]"><span x-text="progress"></span>% completed</span>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="relative w-full md:max-w-[60%] mt-2">
+        <div class="bg-[#e0e0e0] w-full h-2 rounded-xl"></div>
+        <div :style="'width:' + progress + '%'" class="absolute top-0 left-0 h-2 rounded-xl bg-[#ff0020]"></div>
+      </div>
+
+      <!-- SECTION HEADING -->
+      <div class="py-8">
+        <h1 class="text-3xl md:text-4xl tracking-tight font-bold font-['Roboto'] my-2 max-w-2xl">
+          Customise your car
+        </h1>
+        <p class="text-[#0000009e] text-lg max-w-2xl">
+          Make your car your own with a choice of colours and options
+        </p>
+      </div>
+
+      <!-- CHOOSE COLOUR SECTION START -->
+      <div class="pb-20">
+        <form>
+          <ul class="gap-y-2 gap-x-3 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <template x-for="(color, index) in colours" :key="index">
+              <li class="basis-full h-full">
+                <div class="relative w-full flex h-full">
+                  <input type="radio" name="colours" :id="color.id" :value="color.name"
+                    class="absolute h-6 w-6 bg-white rounded cursor-pointer ml-3 top-1/2 -translate-y-1/2 inline-block peer checked:accent-[#ff0020]">
+                  <label :for="color.id"
+                    class="flex justify-between items-center cursor-pointer peer-checked:text-[#ff0020] peer-checked:border-[#ff0020] peer-checked:bg-[#ff0020]/10 border border-[#616161] hover:border-black transition-all rounded-xl w-full h-full bg-white p-3 pl-11 text-[#000000de]">
+                    <span class="flex flex-col justify-center items-start text-left">
+                      <span class="text-inherit capitalize select-none" x-text="color.name"></span>
+                      <span class="capitalize select-none text-[#0000009e] mt-2" x-show="color.price">
+                        (<span x-text="color.price ? color.price : ''"></span>)
+                      </span>
+                    </span>
+                    <template x-if="color.bg">
+                      <div class="inline-flex w-12 h-12 border border-[#0000001f] rounded-full shrink-0 drop-shadow-sm"
+                        :class="color.bg">
+                        <svg width="35" height="41" class="absolute">
+                          <defs>
+                            <linearGradient x1="91.752%" y1="-12.926%" x2="8.904%" y2="85.976%" id="gloss-gradient">
+                              <stop stop-color="#FFF" stop-opacity=".32" offset="0%"></stop>
+                              <stop stop-color="#FFF" stop-opacity="0" offset="100%"></stop>
+                            </linearGradient>
+                          </defs>
+                          <path
+                            d="M11.34 41.66C1.527 35.574-1.911 22.937 3.467 12.718 8.844 2.5 21.207-1.822 31.78 2.82c-.27.14-.18.05.1.05.45.2.9.41 1.33.64a6.75 6.75 0 0 1 1.48 3.2C38.68 23 18.38 29 11.34 41.66z"
+                            fill="url(#gloss-gradient)"></path>
+                        </svg>
+                      </div>
+                    </template>
+                  </label>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </form>
+      </div>
+      <!-- CHOOSE COLOUR SECTION END -->
+      <!-- ADD-ONS SECTION START -->
+      <div class="pb-32">
+        <!-- ADD-ONS BUTTON -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" x-show="!showAddons">
+          <button @click.prevent="showAddons = true"
+            class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-[#ff0020] before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-[#ff0020] hover:text-white block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-white  after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
+            Choose add-ons
+          </button>
+        </div>
+
+        <!-- ADDTIONAL OPTIONS -->
+        <div x-show="showAddons" x-transition>
+          <!-- HEADING -->
+          <h2 class="text-2xl md:text-3xl tracking-tight font-bold font-['Roboto'] my-3 max-w-2xl">
+            Select your additional options
+          </h2>
+          <!-- ADDONS -->
+          <div>
+            <template x-for="(addon, index) in addons" :key="index">
+              <div class="border-b">
+                <!--========-->
+                <button @click.prevent="addon.isOpen = !addon.isOpen"
+                  class="border-none outline-none bg-none w-full p-5 flex justify-between items-center" :class="{
+                    'text-[#ff0020]' : addon.isOpen
+                  }">
+                  <!--========-->
+                  <p class=" text-base uppercase font-bold" x-text="addon.title"></p>
+                  <!--========-->
+                  <svg x-bind:class="{'rotate-180':addon.isOpen === true}" xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <!--========-->
+                <form x-show="addon.isOpen" x-transition>
+                  <ul class="flex flex-wrap gap-y-2 gap-x-3 px-5 w-full">
+                    <template x-for="(option, index) in addon.options" :key="index">
+                      <li class="basis-full">
+                        <div class="relative w-full flex">
+                          <input type="checkbox" :name="option.id" :id="option.id" :value="option.id"
+                            class="absolute h-6 w-6 bg-white rounded cursor-pointer ml-3 top-1/2 -translate-y-1/2 inline-block peer checked:accent-[#ff0020]">
+                          <label :for="option.id"
+                            class="flex items-center justify-between cursor-pointer peer-checked:text-[#ff0020] peer-checked:border-[#ff0020] peer-checked:bg-[#ff0020]/10 border border-[#616161] hover:border-black transition-all rounded-xl w-full h-full bg-white p-5 pl-14 text-[#000000de]">
+                            <span class="flex flex-col justify-center items-start text-left">
+                              <span class="text-inherit capitalize select-none" x-text="option.name"></span>
+                            </span>
+                            <span x-text="option.price">
+
+                            </span>
+                          </label>
+                        </div>
+                      </li>
+                    </template>
+                  </ul>
+                </form>
+                <!--========-->
+              </div>
+            </template>
+          </div>
+          <!-- ADDONS PRICE -->
+          <div class="pt-10">
+            <div class="text-2xl lg:text-4xl font-bold text-[#ff0020]">0$</div>
+            <span class="text-lg leading-7 font-bold mt-1 block">RRP of colour + options selected</span>
+          </div>
+        </div>
+      </div>
+      <!-- ADD-ONS SECTION END -->
+      <!-- FOOTER -->
+      <footer class="fixed bottom-0 left-0 right-0 z-20">
+        <div class="container mx-auto px-[15px] xl:max-w-[1200px]">
+          <div class="border-t border-[#0000001f] w-full flex py-4 gap-4 bg-white">
+            <a href="buy-deals-page.html"
+              class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-[#ff0020] before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-[#ff0020] hover:text-white block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-white  after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
+              back
+            </a>
+            <a href="buy-postcode-page.html"
+              class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-white before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-white hover:text-[#ff0020] block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-[#ff0020]  after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
+              Next Step
+            </a>
+          </div>
+        </div>
+      </footer>
+    </section>
+
+  </main>
+  <!-- MAIN CONTAINER END -->
+</body>
+
+</html>

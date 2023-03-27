@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./dist/main.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+  <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> -->
+  <script defer src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
+
+  <title>mobWOW | Car Discovry</title>
+</head>
+
+<body>
+  <!-- MAIN CONTAINER START -->
+  <main class="h-full">
+    <!-- RED BOX -->
+    <div class="bg-[#ff0020] hidden lg:block fixed top-0 right-0 left-[97%] bottom-0"></div>
+    <!-- HEADER START -->
+    <header class="container mx-auto px-[15px] xl:max-w-[1200px]">
+      <!-- LOGO -->
+      <div class="py-8">
+        <a href="#" class="w-32 block">
+          <img src="images/mobWOW-Base-Logo-Red (2).svg" alt="Logo" title="Logo" class="w-full h-auto">
+        </a>
+      </div>
+    </header>
+    <!-- HEADER END -->
+    <!-- ONBOARDING SECTION START-->
+    <section class="container mx-auto px-[15px] xl:max-w-[1200px] pt-8" x-data="{
+        progress: 67,
+      }">
+
+      <!-- BREADCRUMBS & PROGRESS -->
+      <div class="flex w-full md:max-w-[60%] justify-between">
+        <!-- BREADCRUMB -->
+        <a href="buy-model-page.html"
+          class="capitalize inline-flex items-center underline text-gray-700 transition-all hover:text-[#ff0020]">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+              <path fill-rule="evenodd"
+                d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                clip-rule="evenodd" />
+            </svg>
+          </span>
+          <span class="text-base">back</span>
+        </a>
+        <!-- PROGRESS -->
+        <span class="text-base text-[#000000de]"><span x-text="progress"></span>% completed</span>
+      </div>
+
+      <!-- PROGRESS BAR -->
+      <div class="relative w-full md:max-w-[60%] mt-2">
+        <div class="bg-[#e0e0e0] w-full h-2 rounded-xl"></div>
+        <div :style="'width:' + progress + '%'" class="absolute top-0 left-0 h-2 rounded-xl bg-[#ff0020]"></div>
+      </div>
+
+      <!-- SECTION HEADING -->
+      <div class="py-8">
+        <h1 class="text-3xl md:text-4xl tracking-tight font-bold font-['Roboto'] my-2 max-w-2xl">
+          Which <span>Hyundai</span> <span>i10</span> do you want deals for?
+        </h1>
+      </div>
+    </section>
+    <!-- ONBOARDING SECTION END -->
+    <!-- FILTER SECTION START -->
+    <section class="container mx-auto px-[15px] xl:max-w-[1200px] pb-8" x-data="{
+       equipments: [
+        {
+          name: 'parking sensors',
+          id: 'parking-sensors'
+        },
+        {
+          name: 'satnav',
+          id: 'satnav'
+        },
+        {
+          name: 'rearview camera',
+          id: 'rearview-camera'
+        },
+        {
+          name: 'climate control',
+          id: 'climate-control'
+        },
+        {
+          name: 'cruise control',
+          id: 'cruise-control'
+        },
+        {
+          name: 'touchscreen infotainment',
+          id: 'touchscreen-infotainment'
+        },
+        {
+          name: 'heated seats',
+          id: 'heated-seats'
+        },
+        {
+          name: 'apple CarPlay',
+          id: 'apple-carplay'
+        },
+        {
+          name: 'leather seats',
+          id: 'leather-seats'
+        },
+        {
+          name: 'android auto',
+          id: 'android-auto'
+        },
+      ],
+      fuelTypes: [
+        {
+          fuel: 'petrol',
+        },
+        {
+          fuel: 'diesel',
+        },
+        {
+          fuel: 'electric',
+        },
+        {
+          fuel: 'hybrid',
+        },
+      ],
+      bootSpace: [
+        {
+          suitcase: 'Any',
+          litres: false
+        },
+        {
+          suitcase: '1 suitcase',
+          litres: '120 litres'
+        },
+        {
+          suitcase: '2 suitcases',
+          litres: '240 litres'
+        },
+        {
+          suitcase: '3 suitcases',
+          litres: '360 litres'
+        },
+        {
+          suitcase: '4 suitcases',
+          litres: '480 litres'
+        },
+        {
+          suitcase: '5+ suitcases',
+          litres: '600 litres'
+        },
+        
+      ],
+      dropdownOpen: false,
+      filter : false,
+      bodyOverflow: function (modal) {
+        document.querySelector('body').classList.remove('overflow-hidden', 'overflow-visible');
+        document.querySelector('body').classList.add(modal ? 'overflow-hidden' : 'overflow-visible');
+      }
+  }">
+      <!-- FILTERS SECTION -->
+      <div class="py-[10px]">
+        <!-- CONTAINER LARGE -->
+        <div class="flex flex-col xl:max-w-[1200px] px-2.5 mx-auto relative">
+          <form>
+            <!-- FILTER PRIMARY -->
+            <div class="flex flex-wrap items-center gap-2.5 mb-5">
+              <!-- EQUIPMENT -->
+              <div class="flex shrink-0 border py-1 rounded-2xl pr-5 justify-center items-center relative"
+                :class="isOpen ? 'bg-[#ff0020]/10 border-[#ff0020]' : 'bg-white border-black/10 hover:border-black/30'"
+                x-data="{
+                                    isOpen: false,
+                                    selected: 'Equipment',
+                                  }">
+                <input type="text" x-model="selected" x-ref="input" hidden>
+                <button class="text-sm font-['Roboto'] px-2 flex items-center justify-center gap-x-1"
+                  :class="isOpen ? 'text-[#ff0020]' : 'text-[#696A71]'" @click.prevent="isOpen = !isOpen">
+                  <span class="text-xs font-['Roboto']">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                      class="w-6 h-6 transition-all" :class="{'rotate-180' : isOpen}">
+                      <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </span>
+                  <span x-text="selected"></span>
+                </button>
+                <div
+                  class="absolute mt-0.5 top-full w-full min-w-[200px] md:min-w-[300px] left-0 bg-white rounded-xl p-1.5 border border-[#CCCCCC] origin-top z-40 drop-shadow-lg"
+                  @click.away="isOpen = false" x-show="isOpen" x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="scale-y-0 opacity-20" x-transition:enter-end="scale-y-100 opacity-100"
+                  x-transition:leave="transition ease-in duration-300"
+                  x-transition:leave-start="opacity-100 scale-y-100" x-transition:leave-end="opacity-20 scale-y-0">
+                  <ul class="max-h-72 overflow-y-auto">
+                    <div class="rounded-md overflow-hidden">
+                      <template x-for="(equipment, index) in equipments" :key="index">
+                        <li class="basis-full">
+                          <div class="relative w-full flex">
+                            <input type="checkbox" :name="equipment.id" :id="equipment.id" :value="equipment.name"
+                              class="absolute h-6 w-6 bg-white rounded cursor-pointer ml-3 top-1/2 -translate-y-1/2 inline-block peer checked:accent-[#ff0020]">
+                            <label :for="equipment.id"
+                              class="cursor-pointer peer-checked:text-[#ff0020] peer-checked:border-[#ff0020] peer-checked:bg-[#ff0020]/10 transition-all w-full h-full bg-white p-3 pl-11 text-[#000000de] hover:bg-[#ff0020]/5">
+                              <span class="flex flex-col justify-center items-start text-left">
+                                <span class="text-inherit capitalize select-none" x-text="equipment.name"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </li>
+                      </template>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+              <!-- FUEL TYPE -->
+              <div class="flex shrink-0 border py-1 rounded-2xl pr-5 justify-center items-center relative"
+                :class="isOpen ? 'bg-[#ff0020]/10 border-[#ff0020]' : 'bg-white border-black/10 hover:border-black/30'"
+                x-data="{
+                                    isOpen: false,
+                                    selected: 'Fuel',
+                                  }">
+                <input type="text" x-model="selected" x-ref="input" hidden>
+                <button class="text-sm font-['Roboto'] px-2 flex items-center justify-center gap-x-1"
+                  :class="isOpen ? 'text-[#ff0020]' : 'text-[#696A71]'" @click.prevent="isOpen = !isOpen">
+                  <span class="text-xs font-['Roboto']">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                      class="w-6 h-6 transition-all" :class="{'rotate-180' : isOpen}">
+                      <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </span>
+                  <span x-text="selected"></span>
+                </button>
+                <div
+                  class="absolute mt-0.5 top-full w-full min-w-[200px] md:min-w-[300px] left-0 bg-white rounded-xl p-1.5 border border-[#CCCCCC] origin-top z-40 drop-shadow-lg"
+                  @click.away="isOpen = false" x-show="isOpen" x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="scale-y-0 opacity-20" x-transition:enter-end="scale-y-100 opacity-100"
+                  x-transition:leave="transition ease-in duration-300"
+                  x-transition:leave-start="opacity-100 scale-y-100" x-transition:leave-end="opacity-20 scale-y-0">
+                  <ul class="max-h-72 overflow-y-auto">
+                    <div class="rounded-md overflow-hidden">
+                      <template x-for="(type, index) in fuelTypes" :key="index">
+                        <li class="basis-full">
+                          <div class="relative w-full flex">
+                            <input type="checkbox" :name="type.fuel" :id="type.fuel" :value="type.fuel"
+                              class="absolute h-6 w-6 bg-white rounded cursor-pointer ml-3 top-1/2 -translate-y-1/2 inline-block peer checked:accent-[#ff0020]">
+                            <label :for="type.fuel"
+                              class="cursor-pointer peer-checked:text-[#ff0020] peer-checked:border-[#ff0020] peer-checked:bg-[#ff0020]/10 transition-all w-full h-full bg-white p-3 pl-11 text-[#000000de] hover:bg-[#ff0020]/5">
+                              <span class="flex flex-col justify-center items-start text-left">
+                                <span class="text-inherit capitalize select-none" x-text="type.fuel"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </li>
+                      </template>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+              <!-- BUDGET -->
+              <div class="flex shrink-0 border py-1 rounded-2xl pr-5 justify-center items-center relative"
+                :class="isOpen ? 'bg-[#ff0020]/10 border-[#ff0020]' : 'bg-white border-black/10 hover:border-black/30'"
+                x-data="{
+                                    isOpen: false,
+                                    selected: 'Budget',
+                                  }">
+                <input type="text" x-model="selected" x-ref="input" hidden>
+                <button class="text-sm font-['Roboto'] px-2 flex items-center justify-center gap-x-1"
+                  :class="isOpen ? 'text-[#ff0020]' : 'text-[#696A71]'" @click.prevent="isOpen = !isOpen">
+                  <span class="text-xs font-['Roboto']">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                      class="w-6 h-6 transition-all" :class="{'rotate-180' : isOpen}">
+                      <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </span>
+                  <span x-text="selected"></span>
+                </button>
+                <div
+                  class="absolute mt-0.5 top-full w-full min-w-[200px] md:min-w-[300px] left-0 bg-white rounded-xl p-1.5 border border-[#CCCCCC] origin-top z-40 drop-shadow-lg"
+                  @click.away="isOpen = false" x-show="isOpen" x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="scale-y-0 opacity-20" x-transition:enter-end="scale-y-100 opacity-100"
+                  x-transition:leave="transition ease-in duration-300"
+                  x-transition:leave-start="opacity-100 scale-y-100" x-transition:leave-end="opacity-20 scale-y-0">
+                  <ul class="max-h-72 overflow-y-auto">
+                    <div class="rounded-md overflow-hidden p-4">
+                      <form>
+                        <!-- RADIO BUTTONS -->
+                        <div class="flex items-center mb-4">
+                          <div class="basis-1/2 md:basis-0">
+                            <input type="radio" id="monthly" name="paymentType" value="monthly" class="peer hidden"
+                              checked />
+                            <label for="monthly"
+                              class="text-[#ff0020] peer-checked:text-white peer-checked:bg-[#ff0020] border rounded-l-md border-[#ff0020] hover:bg-[#ff0020]/10 py-1 px-3 cursor-pointer transition-all select-none block">Monthly</label>
+                          </div>
+                          <div class="basis-1/2 md:basis-0">
+                            <input type="radio" id="cash" name="paymentType" value="cash" class="peer hidden" />
+                            <label for="cash"
+                              class="text-[#ff0020] peer-checked:text-white peer-checked:bg-[#ff0020] border rounded-r-md border-[#ff0020] hover:bg-[#ff0020]/10 py-1 px-3 cursor-pointer transition-all select-none block">Cash</label>
+                          </div>
+                        </div>
+
+                        <!-- MIN MAX DROPDOWNS -->
+                        <div class="w-full md:w-auto md:max-w-sm flex">
+                          <!-- MIN -->
+                          <div class="mr-4 flex-1">
+                            <label for="minPrice" class="flex flex-col">
+                              <span class="text-[#000000de]">Minimum price</span>
+                              <select name="minPrice" id="minPrice"
+                                class="w-full bg-white py-2 px-2.5 appearance-none text-base bg-[url('../images/download.svg')] bg-no-repeat bg-[position:right_0.5rem_center] bg-[length:1.5em_1.5em] text-[#766d66] border border-gray-400 hover:border-black rounded-md transition-all">
+                                <option>Any</option>
+                                <option>$50</option>
+                                <option>$100</option>
+                                <option>$200</option>
+                                <option>$300</option>
+                              </select>
+                            </label>
+                          </div>
+                          <!-- MAX -->
+                          <div class="flex-1">
+                            <label for="maxPrice" class="flex flex-col">
+                              <span class="text-[#000000de]">Maximum price</span>
+                              <select name="maxPrice" id="maxPrice"
+                                class="w-full bg-white py-2 px-2.5 appearance-none text-base bg-[url('../images/download.svg')] bg-no-repeat bg-[position:right_0.5rem_center] bg-[length:1.5em_1.5em] text-[#766d66] border border-gray-400 hover:border-black rounded-md transition-all">
+                                <option>Any</option>
+                                <option>$5000</option>
+                                <option>$10000</option>
+                                <option>$20000</option>
+                                <option>$30000</option>
+                              </select>
+                            </label>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+              <!-- MORE FILTERS -->
+              <div @click.away="filter=false; bodyOverflow(filter)" class="shrink-0">
+                <!--========-->
+                <button @click.prevent="filter=true; bodyOverflow(filter)"
+                  class="border py-1.5 rounded-2xl text-sm font-['Roboto'] px-4 flex items-center justify-center gap-x-1"
+                  :class="filter ? 'text-[#ff0020] bg-[#ff0020]/10 border-[#ff0020]' : 'text-[#696A71] bg-white border-black/10 hover:border-black/30'">
+                  <span>More filters</span>
+                </button>
+                <!--====menu====-->
+                <template x-if="true">
+                  <div :class="{'-translate-x-0' : filter, 'translate-x-full': !filter  }"
+                    class="fixed w-full md:w-1/3 h-full transform transition-transform duration-700 ease-in-out z-50 bg-white right-0 top-0 bottom-0 shadow-2xl overscroll-none overflow-hidden">
+                    <!--========-->
+                    <div class=" relative">
+                      <!--========-->
+                      <div
+                        class="flex items-center justify-between p-5 border-b sticky top-0 left-0 right-0 bg-white z-50 ">
+                        <!--========-->
+                        <p class=" text-lg font-bold">Filters</p>
+                        <!--========-->
+                        <div class=" flex items-center space-x-4">
+                          <!--========-->
+                          <!--========-->
+                          <svg @click="filter=false; bodyOverflow(filter)" xmlns="http://www.w3.org/2000/svg"
+                            class="w-6 h-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </div>
+                      </div>
+                      <!--========-->
+                      <div class="overflow-auto h-[73vh] overscroll-none">
+
+                        <div x-data="{dropdownL2 : false}" class="border-b">
+                          <!--========-->
+                          <button @click.prevent="dropdownL2=!dropdownL2"
+                            class="border-none outline-none bg-none w-full p-5 flex justify-between items-center">
+                            <!--========-->
+                            <p class=" text-sm uppercase font-bold">Boot space</p>
+                            <!--========-->
+                            <svg x-bind:class="{'rotate-180':dropdownL2===true}" xmlns="http://www.w3.org/2000/svg"
+                              class="h-6 w-6 transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                              stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+                          <!--========-->
+                          <form x-show="dropdownL2" x-transition>
+                            <ul class="flex flex-wrap gap-y-2 gap-x-3 px-5 w-full">
+                              <template x-for="(space, index) in bootSpace" :key="index">
+                                <li class="basis-full">
+                                  <div class="relative w-full flex">
+                                    <input type="radio" name="bootSpace" :id="space.suitcase" :value="space.suitcase"
+                                      class="absolute h-6 w-6 bg-white rounded cursor-pointer ml-3 top-1/2 -translate-y-1/2 inline-block peer checked:accent-[#ff0020]">
+                                    <label :for="space.suitcase"
+                                      class="cursor-pointer peer-checked:text-[#ff0020] peer-checked:border-[#ff0020] peer-checked:bg-[#ff0020]/10 border border-[#616161] hover:border-black transition-all rounded-xl w-full h-full bg-white p-3 pl-11 text-[#000000de]">
+                                      <span class="flex flex-col justify-center items-start text-left">
+                                        <span class="text-inherit capitalize select-none mb-2"
+                                          x-text="space.suitcase"></span>
+                                        <span class="capitalize select-none text-[#0000009e]" x-show="space.litres">
+                                          (<span x-text="space.litres ? space.litres : ''"></span>)
+                                        </span>
+                                      </span>
+                                    </label>
+                                  </div>
+                                </li>
+                              </template>
+                            </ul>
+                          </form>
+                          <!--========-->
+                        </div>
+                        <!--========-->
+                      </div>
+                      <!--========-->
+                      <div class=" flex justify-center p-5 py-6 border-t fixed bottom-0 left-0 right-0 bg-white z-50">
+                        <!--========-->
+                        <a href="#"
+                          class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-white before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-white hover:text-[#ff0020] block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-[#ff0020]  after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
+                          116 Cars
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+              <div x-show="filter===true" class="fixed inset-0 bg-black z-40 bg-opacity-50"></div>
+
+              <!-- CLEAR ALL -->
+              <a href="#" class="shrink-0 text-base transition-all text-[#ff0020] hover:underline">Clear all</a>
+            </div>
+            <!-- FILTER SECONDARY -->
+            <div class="flex flex-col">
+              <p class="text-base font-bold text-black/75">
+                <span>116</span>
+                <span>cars found</span>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- FILTER SECTION END -->
+    <!-- RESULTS SECTION START -->
+    <section class="w-full overflow-hidden" x-data="{
+        showDetails: false,
+        cardsData: [
+          {
+            brand: 'Dacia',
+            model: 'Sandero',
+            url: '#',
+            description: 'A small car that majors on affordability and practicality',
+            priceMonth: '$255',
+            price: '$3000',
+            review: 4,
+            imageSrc: 'images/result1.png',
+          },
+          {
+            brand: 'Hyundai',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$30000',
+            review: 5,
+            imageSrc: 'images/result2.png',
+          },
+          {
+            brand: 'Hyundai',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$30000',
+            review: 3,
+            imageSrc: 'images/result3.png',
+          },
+          {
+            brand: 'Honda',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$40000',
+            review: 4.5,
+            imageSrc: 'images/result4.png',
+          },
+          {
+            brand: 'Hyundai',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$30000',
+            review: 5,
+            imageSrc: 'images/result5.png',
+          },
+          {
+            brand: 'Hyundai',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$30000',
+            review: 5,
+            imageSrc: 'images/result6.png',
+          },
+          {
+            brand: 'Hyundai',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$30000',
+            review: 5,
+            imageSrc: 'images/result7.png',
+          },
+          {
+            brand: 'Hyundai',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$30000',
+            review: 5,
+            imageSrc: 'images/result8.png',
+          },
+          {
+            brand: 'Hyundai',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$30000',
+            review: 5,
+            imageSrc: 'images/result9.png',
+          },
+          {
+            brand: 'Hyundai',
+            model: 'i10',
+            url: '#',
+            description: 'A very good all-round city car',
+            priceMonth: '$500',
+            price: '$30000',
+            review: 5,
+            imageSrc: 'images/result10.png',
+          }
+        ]
+      }">
+      <!-- DESKTOP SLIDER -->
+      <div class="container mx-auto xl:max-w-[1200px] text-[#494b7a] hidden lg:block overflow-hidden py-8 bg-white"
+        x-data="{
+                init(){
+                  $nextTick(() => {
+                         Array.from($refs.pagination.children)[1].classList.add('w-16', 'bg-[#ff0020]');
+                         Array.from($refs.pagination.children)[1].classList.remove('w-8', 'bg-[#e2dbff]');
+                        });
+                },
+                currentSlide: 0,
+                numberOfItems: cardsData.length,
+                numberOfSlides: Math.ceil(cardsData.length) - 2,
+                pagContainer: $refs.pagination.children,
+                paginationClass: function () {
+                  Array.from($refs.pagination.children).forEach(el => {
+                          el.classList.remove('w-16', 'bg-[#ff0020]');
+                          el.classList.add('w-8', 'bg-[#e2dbff]');
+                          if (el.id.substr(2) === $refs.testimonialContainer.dataset.id) {
+                            el.classList.add('w-16', 'bg-[#ff0020]');
+                            el.classList.remove('w-8', 'bg-[#e2dbff]');
+                          }
+                    });
+                },
+                moveSlideRight(){
+                  this.currentSlide++
+                  $refs.testimonialContainer.dataset.id = this.currentSlide + 1;
+                  if(this.currentSlide >= this.numberOfSlides + 1){
+                    this.currentSlide = this.numberOfSlides;
+                    $refs.testimonialContainer.dataset.id = this.currentSlide + 1;
+                  } 
+                  $refs.testimonialContainer.style.transform = `translateX(-${((this.currentSlide) * 33.333)}%)`
+                  this.paginationClass()
+                },
+                moveSlideLeft(){
+                  this.currentSlide--
+                  if(this.currentSlide <= 0){
+                    this.currentSlide = 0;
+                    $refs.testimonialContainer.dataset.id = this.currentSlide + 1;
+                    $refs.testimonialContainer.style.transform = `translateX(0%)`
+                  }else{
+                    $refs.testimonialContainer.style.transform = `translateX(-${((this.currentSlide) * 33.333)}%)`
+                    $refs.testimonialContainer.dataset.id = this.currentSlide + 1;
+                  }
+                  this.paginationClass()
+                },
+              }">
+        <!-- SLIDER CONTAINER -->
+        <div class="relative h-full">
+          <!-- BUTTON LEFT -->
+          <button @click="
+                  moveSlideLeft();
+                " x-show="currentSlide > 0"
+            class="absolute p-3 h-12 w-12 rounded-full bg-[#ff0020] bg-opacity-90 text-white z-10 left-1 top-1/2 -translate-y-1/2"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" aria-hidden="true" data-testid="dynamic-hero-icon"
+              class="w-6 h-6 right-px relative">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <!-- BUTTON RIGHT -->
+          <button @click="
+                  moveSlideRight();
+                " x-show="currentSlide < numberOfSlides"
+            class="absolute p-3 h-12 w-12 rounded-full bg-[#ff0020] bg-opacity-90 text-white z-10 right-1 top-1/2 -translate-y-1/2"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" aria-hidden="true" data-testid="dynamic-hero-icon" class="w-6 h-6 left-px relative">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+          <!-- SLIDER -->
+          <div class="flex flex-nowrap transition-all duration-500" x-ref="testimonialContainer" data-id="1">
+            <!-- SLIDE -->
+            <template x-for="(car, index) in cardsData" :key="index">
+              <div class="transition-all duration-500 inline-block shrink-0 w-[33.333333%] p-2">
+                <!-- CARDS GENERATOR -->
+                <!-- CARD -->
+                <div class="mb-3 transition-all" x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-50">
+                  <article
+                    class="overflow-hidden rounded-md drop-shadow-[0px_0px_5px_rgba(0,0,0,0.1)] bg-[#FFFDFC] text-center transition-all duration-300 hover:-translate-y-[10px]">
+                    <!-- HEADING -->
+                    <div class="relative text-left p-5">
+                      <h2 class="font-['Roboto'] leading-tight text-base xl:text-lg text-[#0b2c3d] font-bold
+                      ">Premium</h2>
+                    </div>
+                    <!-- OTHER DETAILS -->
+                    <div class="py-[20px] px-[20px] text-left">
+                      <!-- MPi / T-GDi -->
+                      <div class="text-[14px] leading-[1.75] text-[#0000009e] font-bold">
+                        <span>1.2 MPi</span>
+                        <span>Auto</span>
+                      </div>
+                      <!-- MINOR DETAILS -->
+                      <div class="text-[14px] leading-[1.75] text-[#0000009e] font-semibold">
+                        <span>1.2 litres</span> |
+                        <span>Manual</span> |
+                        <span>Petrol</span> |
+                        <span>5</span> doors
+                      </div>
+                      <!-- INITIAL PRICE -->
+                      <div class="text-sm text-[#0000009e] leading-tight mt-1.5 mb-4">
+                        RRP from <span class="line-through">$16,295</span>
+                      </div>
+                      <!-- MOBWOW PRICE -->
+                      <ul class="border-t border-[#E0E0E0] py-[12px]">
+                        <li class="flex flex-wrap items-center justify-between">
+                          <div class="font-['Roboto'] text-[#0b2c3d] leading-none">
+                            <span class="block mb-0.5 text-sm">
+                              mobwow price from:
+                            </span>
+                            <span class="font-medium text-base">
+                              <span x-text="car.priceMonth"></span>* / month
+                            </span>
+                          </div>
+                          <span class="flex flex-wrap items-center">
+                            <button class="mr-[15px] text-[#9D9C9C] hover:text-[#ff0020]" aria-label="svg">
+                              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M13.1667 11.6667C12.8572 11.6667 12.5605 11.7896 12.3417 12.0084C12.1229 12.2272 12 12.5239 12 12.8334C12 13.1428 12.1229 13.4395 12.3417 13.6583C12.5605 13.8771 12.8572 14 13.1667 14C13.4761 14 13.7728 13.8771 13.9916 13.6583C14.2104 13.4395 14.3333 13.1428 14.3333 12.8334C14.3333 12.5239 14.2104 12.2272 13.9916 12.0084C13.7728 11.7896 13.4761 11.6667 13.1667 11.6667ZM11 12.8334C11 12.2587 11.2283 11.7076 11.6346 11.3013C12.0409 10.895 12.592 10.6667 13.1667 10.6667C13.7413 10.6667 14.2924 10.895 14.6987 11.3013C15.1051 11.7076 15.3333 12.2587 15.3333 12.8334C15.3333 13.408 15.1051 13.9591 14.6987 14.3654C14.2924 14.7717 13.7413 15 13.1667 15C12.592 15 12.0409 14.7717 11.6346 14.3654C11.2283 13.9591 11 13.408 11 12.8334Z"
+                                  fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M9.26984 1.14667C9.36347 1.24042 9.41606 1.3675 9.41606 1.5C9.41606 1.6325 9.36347 1.75958 9.26984 1.85333L8.4565 2.66667H11.1665C11.8295 2.66667 12.4654 2.93006 12.9343 3.3989C13.4031 3.86774 13.6665 4.50363 13.6665 5.16667V11C13.6665 11.1326 13.6138 11.2598 13.5201 11.3536C13.4263 11.4473 13.2991 11.5 13.1665 11.5C13.0339 11.5 12.9067 11.4473 12.813 11.3536C12.7192 11.2598 12.6665 11.1326 12.6665 11V5.16667C12.6665 4.96968 12.6277 4.77463 12.5523 4.59264C12.4769 4.41065 12.3665 4.24529 12.2272 4.10601C12.0879 3.96672 11.9225 3.85623 11.7405 3.78085C11.5585 3.70547 11.3635 3.66667 11.1665 3.66667H8.45717L9.2705 4.48C9.36154 4.57434 9.41188 4.70067 9.41068 4.83177C9.40948 4.96287 9.35683 5.08825 9.26409 5.18091C9.17134 5.27357 9.04591 5.32609 8.91481 5.32717C8.78371 5.32825 8.65743 5.27779 8.56317 5.18667L6.8965 3.52C6.80287 3.42625 6.75028 3.29917 6.75028 3.16667C6.75028 3.03417 6.80287 2.90708 6.8965 2.81333L8.56317 1.14667C8.65692 1.05303 8.784 1.00044 8.9165 1.00044C9.049 1.00044 9.17609 1.05303 9.26984 1.14667ZM2.83317 4.33333C2.98638 4.33333 3.13809 4.30316 3.27963 4.24453C3.42118 4.1859 3.54979 4.09996 3.65813 3.99162C3.76646 3.88329 3.8524 3.75468 3.91103 3.61313C3.96966 3.47158 3.99984 3.31988 3.99984 3.16667C3.99984 3.01346 3.96966 2.86175 3.91103 2.7202C3.8524 2.57866 3.76646 2.45004 3.65813 2.34171C3.54979 2.23337 3.42118 2.14744 3.27963 2.08881C3.13809 2.03018 2.98638 2 2.83317 2C2.52375 2 2.22701 2.12292 2.00821 2.34171C1.78942 2.5605 1.6665 2.85725 1.6665 3.16667C1.6665 3.47609 1.78942 3.77283 2.00821 3.99162C2.22701 4.21042 2.52375 4.33333 2.83317 4.33333ZM4.99984 3.16667C4.99984 3.7413 4.77156 4.2924 4.36524 4.69873C3.95891 5.10506 3.40781 5.33333 2.83317 5.33333C2.25853 5.33333 1.70743 5.10506 1.30111 4.69873C0.894777 4.2924 0.666504 3.7413 0.666504 3.16667C0.666504 2.59203 0.894777 2.04093 1.30111 1.6346C1.70743 1.22827 2.25853 1 2.83317 1C3.40781 1 3.95891 1.22827 4.36524 1.6346C4.77156 2.04093 4.99984 2.59203 4.99984 3.16667Z"
+                                  fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M6.73016 14.8533C6.63653 14.7596 6.58394 14.6325 6.58394 14.5C6.58394 14.3675 6.63653 14.2404 6.73016 14.1467L7.5435 13.3333H4.8335C4.17046 13.3333 3.53457 13.0699 3.06573 12.6011C2.59689 12.1323 2.3335 11.4964 2.3335 10.8333V5C2.3335 4.86739 2.38617 4.74021 2.47994 4.64645C2.57371 4.55268 2.70089 4.5 2.8335 4.5C2.9661 4.5 3.09328 4.55268 3.18705 4.64645C3.28082 4.74021 3.3335 4.86739 3.3335 5V10.8333C3.3335 11.2312 3.49153 11.6127 3.77284 11.894C4.05414 12.1753 4.43567 12.3333 4.8335 12.3333H7.54283L6.7295 11.52C6.68176 11.4739 6.6437 11.4187 6.61752 11.3576C6.59135 11.2966 6.57759 11.231 6.57704 11.1646C6.5765 11.0982 6.58918 11.0324 6.61435 10.971C6.63952 10.9095 6.67667 10.8537 6.72364 10.8068C6.77061 10.7599 6.82645 10.7228 6.88791 10.6977C6.94937 10.6726 7.01521 10.6599 7.0816 10.6605C7.14799 10.6612 7.2136 10.675 7.27459 10.7012C7.33557 10.7274 7.39073 10.7656 7.43683 10.8133L9.1035 12.48C9.19713 12.5738 9.24972 12.7008 9.24972 12.8333C9.24972 12.9658 9.19713 13.0929 9.1035 13.1867L7.43683 14.8533C7.34308 14.947 7.216 14.9996 7.0835 14.9996C6.951 14.9996 6.82391 14.947 6.73016 14.8533Z"
+                                  fill="currentColor"></path>
+                              </svg>
+                            </button>
+                            <button class="text-[#9D9C9C] hover:text-[#ff0020]" aria-label="svg">
+                              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(.clip0_656_640)">
+                                  <path
+                                    d="M7.9999 2.74799L7.2829 2.01099C5.5999 0.280988 2.5139 0.877988 1.39989 3.05299C0.876895 4.07599 0.758895 5.55299 1.71389 7.43799C2.63389 9.25299 4.5479 11.427 7.9999 13.795C11.4519 11.427 13.3649 9.25299 14.2859 7.43799C15.2409 5.55199 15.1239 4.07599 14.5999 3.05299C13.4859 0.877988 10.3999 0.279988 8.7169 2.00999L7.9999 2.74799ZM7.9999 15C-7.33311 4.86799 3.27889 -3.04001 7.82389 1.14299C7.88389 1.19799 7.94289 1.25499 7.9999 1.31399C8.05632 1.25504 8.11503 1.19833 8.17589 1.14399C12.7199 -3.04201 23.3329 4.86699 7.9999 15Z"
+                                    fill="currentColor"></path>
+                                </g>
+                                <defs>
+                                  <clipPath class="clip0_656_640">
+                                    <rect width="16" height="16" fill="white"></rect>
+                                  </clipPath>
+                                </defs>
+                              </svg>
+                            </button>
+                          </span>
+                        </li>
+                        <li class="text-sm mt-1 text-[#0000009e]" x-text="car.price"></li>
+                      </ul>
+                      <!-- DEALS BUTTON -->
+                      <div class="border-t border-[#E0E0E0] py-[12px]">
+                        <a href="buy-colours-page.html"
+                          class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-white before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-white hover:text-[#ff0020] block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-[#ff0020]  after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
+                          Find deals
+                        </a>
+                      </div>
+                      <!-- MORE DETAILS -->
+                      <div class="border-t border-[#E0E0E0] py-[12px]">
+                        <!-- SHOW DETAILS BUTTON -->
+                        <button @click.prevent="showDetails = !showDetails"
+                          class="transition-all outline-none border-none leading-none px-[20px] pt-[15px] uppercase font-medium text-[#ff0020] text-sm w-full text-center mx-auto flex items-center justify-center">
+                          <span x-text="showDetails ? 'hide' : 'show'"></span>&nbsp;details
+                          <!-- CHEVRON DOWN -->
+                          <span class="ml-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                              stroke="currentColor" class="w-4 h-4 transition-transform"
+                              :class="{'rotate-180' : showDetails}">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                          </span>
+                        </button>
+                        <!-- DETAILS -->
+                        <div class="mt-5" x-show="showDetails" x-transition>
+                          <!-- DESCROPTION -->
+                          <div class="mb-10">
+                            <h3
+                              class="font-['Roboto'] leading-tight text-base xl:text-lg text-[#0b2c3d] font-bold mb-2">
+                              Description
+                            </h3>
+                            <p class=" text-base leading-snug text-[#0000009e]">
+                              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero eaque praesentium dolor
+                              labore veritatis! Dolores, nulla nesciunt.
+                            </p>
+                          </div>
+                          <!-- KEY INFO -->
+                          <div class="mb-10">
+                            <h3
+                              class="font-['Roboto'] leading-tight text-base xl:text-lg text-[#0b2c3d] font-bold mb-2">
+                              Key information
+                            </h3>
+                            <ul>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Engine size</span>
+                                <span class="font-bold">1.2 Litres</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Engine power</span>
+                                <span class="font-bold">84 bhp</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Transmition</span>
+                                <span class="font-bold">Automatic</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Doors</span>
+                                <span class="font-bold">5</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Seats</span>
+                                <span class="font-bold">5</span>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- STATS INFO -->
+                          <div class="mb-10">
+                            <h3
+                              class="font-['Roboto'] leading-tight text-base xl:text-lg text-[#0b2c3d] font-bold mb-2">
+                              Stats & performance
+                            </h3>
+                            <ul>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Co2 emissions</span>
+                                <span class="font-bold">124.0 g/km</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Emissions standards</span>
+                                <span class="font-bold">euro-6</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">First year road tax</span>
+                                <span class="font-bold">£190</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Insurance group</span>
+                                <span class="font-bold">8E</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Consumption</span>
+                                <span class="font-bold">52.3 mpg</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Acceleration (0 - 62mph)</span>
+                                <span class="font-bold">12.6 s</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Top speed</span>
+                                <span class="font-bold">106 mph</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Boot (seats up)</span>
+                                <span class="font-bold">252 litres</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Boot (seats down)</span>
+                                <span class="font-bold">1,050 litres</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Safety rating</span>
+                                <!-- SAFETY STARS -->
+                                <div
+                                  class="mb-2 text-xl cursor-default inline-block font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,#ff0020_60%,#dedede_0)]"
+                                  :class="{
+                                    'bg-[linear-gradient(90deg,#ff0020_20%,#dedede_0)]' : car.review === 1,
+                                    'bg-[linear-gradient(90deg,#ff0020_30%,#dedede_0)]' : car.review === 1.5,
+                                    'bg-[linear-gradient(90deg,#ff0020_40%,#dedede_0)]' : car.review === 2,
+                                    'bg-[linear-gradient(90deg,#ff0020_50%,#dedede_0)]' : car.review === 2.5,
+                                    'bg-[linear-gradient(90deg,#ff0020_60%,#dedede_0)]' : car.review === 3,
+                                    'bg-[linear-gradient(90deg,#ff0020_70%,#dedede_0)]' : car.review === 3.5,
+                                    'bg-[linear-gradient(90deg,#ff0020_80%,#dedede_0)]' : car.review === 4,
+                                    'bg-[linear-gradient(90deg,#ff0020_90%,#dedede_0)]' : car.review === 4.5,
+                                    'bg-[linear-gradient(90deg,#ff0020_100%,#dedede_0)]' : car.review === 5,
+                                    }">
+                                  ★★★★★
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- OTHER DROPDOWNS -->
+                          <div class="mb-10" x-data="{
+                              dropdowns: [
+                                {
+                                  title: 'Drive convenience',
+                                  bulletPoints: [
+                                    'Fast read/unread filtering',
+                                    'Search encrypted content',
+                                    'Email archiving',
+                                    'Email starring',
+                                    'Read receipts',
+                                    'Export emails to EML',
+                                    'Advanced search',
+                                    'Rapid filter creation',
+                                    'Advanced inbox sorting'
+                                  ],
+                                  isOpen: false,
+                                },
+                                {
+                                  title: 'Entertainment',
+                                  bulletPoints: [
+                                    'Dynamic aliases',
+                                    'Dark mode',
+                                    'Customizable inbox theme and colors',
+                                    'Multi-user support and sub-accounts',
+                                    'Customizable inbox layout',
+                                    'Email & mobile signatures',
+                                    'Threading and non-threaded modes',
+                                    'Multiple addresses',
+                                    'Support for 20+ languages',
+                                    'Right-to-left composer support',
+                                    'Plain and rich text email composers',
+                                    'Custom time zones and formats'
+                                  ],
+                                  isOpen: false,
+                                },
+                                {
+                                  title: 'Exterior Features',
+                                  bulletPoints: [
+                                    '1-click email and calendar import from Gmail',
+                                    'Password-protected Emails',
+                                    'Enhanced tracking protection',
+                                    'PhishGuard protection',
+                                    'Link protection',
+                                    'Send expiring emails',
+                                    'Address verification',
+                                    'Key pinning',
+                                  ],
+                                  isOpen: false,
+                                },
+                                {
+                                  title: 'Interior Features',
+                                  bulletPoints: [
+                                    'Adaptive spam filters',
+                                    'Undo sending',
+                                    'Automatic PGP interoperability',
+                                    'Email typo warnings',
+                                    'Missing attachment detection',
+                                    'Email block and allow lists',
+                                    'Download all attachments',
+                                    'Auto-reply',
+                                    'Catch-all address',
+                                    'Undo move',
+                                    'Browser notifications'
+                                  ],
+                                  isOpen: false,
+                                },
+                                {
+                                  title: 'Passive Safety',
+                                  bulletPoints: [
+                                    '1-click contact import from Gmail',
+                                    'Contact import via CSV',
+                                    'Import contacts on mobile',
+                                    'Merge contacts tool',
+                                  ],
+                                  isOpen: false,
+                                },
+                                {
+                                  title: 'Security',
+                                  bulletPoints: [
+                                    '1-click contact import from Gmail',
+                                    'Contact import via CSV',
+                                    'Import contacts on mobile',
+                                    'Merge contacts tool',
+                                  ],
+                                  isOpen: false,
+                                },
+                                {
+                                  title: 'Wheels',
+                                  bulletPoints: [
+                                    '1-click contact import from Gmail',
+                                    'Contact import via CSV',
+                                    'Import contacts on mobile',
+                                    'Merge contacts tool',
+                                  ],
+                                  isOpen: false,
+                                },
+                            ] 
+                            }">
+                            <ul>
+                              <template x-for="dropdown in dropdowns" x-key="dropdown.title">
+                                <li
+                                  class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                  <!-- DROPDOWN -->
+                                  <div class="p-0 mt-2 rounded-2xl w-full">
+                                    <!-- DROPDOWN BUTTON -->
+                                    <button type="button" @click="dropdown.isOpen = !dropdown.isOpen"
+                                      class="group rounded-xl flex justify-between items-center w-full text-left focus:outline-none">
+                                      <span class="text-lg font-bold" x-text="dropdown.title"></span>
+                                      <span
+                                        class="bg-[#efebff] text-[#ff0020] rounded-full group-focus:text-[#ff0020] group-focus:bg-[#efebff] group-hover:bg-[#f7f5ff] lg:group-hover:bg-[#efebff] group-hover:text-[#ff0020] lg:group-hover:text-[#ff0020] group-focus-visible:bg-purple-50 group-focus-visible:text-[#ff0020] p-1 ml-6 self-start">
+                                        <!-- SVG PLUS -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                          class="w-6 h-6" x-show="!dropdown.isOpen">
+                                          <path fill-rule="evenodd"
+                                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                            clip-rule="evenodd"></path>
+                                        </svg>
+                                        <!-- SVG MINUS -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                          class="w-6 h-6" x-show="dropdown.isOpen">
+                                          <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                            clip-rule="evenodd"></path>
+                                        </svg>
+                                      </span>
+                                    </button>
+                                    <!-- DROPDOWN CONTENT -->
+                                    <div class="p-6 text-base flex-col space-y-5 items-start flex"
+                                      x-show="dropdown.isOpen">
+                                      <ul class="list-disc space-y-2 px-6">
+                                        <template x-for="item in dropdown.bulletPoints">
+                                          <li x-text="item"></li>
+                                        </template>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </template>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <!-- SLIDER NAVIGATION -->
+        <ul class="sticky align-center justify-center flex flex-nowrap w-full space-x-2 lg:mt-10 left-0"
+          x-ref="pagination">
+          <template x-for="i in (numberOfSlides + 1)">
+            <li
+              class="h-1 rounded-full bg-[#e2dbff] inline-block w-8 hover:ring-4 hover:ring-[#efebff] hover:bg-[#ff0020]/50 transition-all duration-300 cursor-pointer"
+              :id="$id('a')" @click="
+                        if(+$el.id.substr(2) === 1){
+                          $refs.testimonialContainer.style.transform = `translateX(0%)`
+                          $refs.testimonialContainer.dataset.id = 1;
+                          
+                        }else{
+    
+                          $refs.testimonialContainer.style.transform = `translateX(-${(Array.from($el.parentElement.children).indexOf($el) - 1) * 33.33333}%)`
+                          $refs.testimonialContainer.dataset.id = +$el.id.substr(2);
+                        }
+                        currentSlide = $refs.testimonialContainer.dataset.id - 1;
+                        Array.from($el.parentElement.children).forEach(el => {
+                          el.classList.remove('w-16', 'bg-[#ff0020]');
+                          el.classList.add('w-8', 'bg-[#e2dbff]');
+                        })
+                        $el.classList.remove('w-8', 'bg-[#e2dbff]');
+                        $el.classList.add('w-16', 'bg-[#ff0020]');
+                      "></li>
+          </template>
+        </ul>
+      </div>
+      <!-- MOBILE SLIDER -->
+      <div
+        class="container max-w-[120rem] px-8 md:px-12 lg:px-24 mx-auto text-[#494b7a] lg:hidden overflow-hidden pb-8 lg:pb-32 bg-white"
+        x-data="{
+                      init(){
+                        $nextTick(() => {
+                               Array.from($refs.paginationSm.children)[1].classList.add('w-16', 'bg-[#ff0020]');
+                               Array.from($refs.paginationSm.children)[1].classList.remove('w-8', 'bg-[#e2dbff]');
+                              });
+                      },
+                      currentSlide: 0,
+                      touchstartX: 0,
+                      touchstartY: 0,
+                      touchendX: 0,
+                      touchendY: 0,
+                      numberOfItems: cardsData.length,
+                      numberOfSlides: Math.ceil(cardsData.length) - 1,
+                      pagContainer: $refs.paginationSm.children,
+                      paginationClassSm: function () {
+                        Array.from($refs.paginationSm.children).forEach(el => {
+                                el.classList.remove('w-16', 'bg-[#ff0020]');
+                                el.classList.add('w-8', 'bg-[#e2dbff]');
+                                if (el.id.substr(2) === $refs.testimonialContainerSm.dataset.id) {
+                                  el.classList.add('w-16', 'bg-[#ff0020]');
+                                  el.classList.remove('w-8', 'bg-[#e2dbff]');
+                                }
+                          });
+                      },
+                      moveSlideRightSm(){
+                        this.currentSlide++
+                        $refs.testimonialContainerSm.dataset.id = this.currentSlide + 1;
+                        if(this.currentSlide >= this.numberOfSlides + 1){
+                          this.currentSlide = this.numberOfSlides;
+                          $refs.testimonialContainerSm.dataset.id = this.currentSlide + 1;
+                        } 
+                        $refs.testimonialContainerSm.style.transform = `translateX(-${((this.currentSlide) * 100)}%)`
+                        this.paginationClassSm()
+                      },
+                      moveSlideLeftSm(){
+                        this.currentSlide--
+                        if(this.currentSlide <= 0){
+                          this.currentSlide = 0;
+                          $refs.testimonialContainerSm.dataset.id = this.currentSlide + 1;
+                          $refs.testimonialContainerSm.style.transform = `translateX(0%)`
+                        }else{
+                          $refs.testimonialContainerSm.style.transform = `translateX(-${((this.currentSlide) * 100)}%)`
+                          $refs.testimonialContainerSm.dataset.id = this.currentSlide + 1;
+                        }
+                        this.paginationClassSm()
+                      },
+                      handleGesture: function(){
+                      if (this.touchendX + 21 < this.touchstartX) { 
+                        this.moveSlideRightSm();
+                      } 
+                      if(this.touchendX > this.touchstartX + 21) {
+                        this.moveSlideLeftSm();
+                      }
+                      }
+                    }">
+        <!-- SLIDER CONTAINER -->
+        <div class="relative h-full overflow-hidden" @mousedown.passive="
+                  touchstartY = $event.screenY;
+                  touchstartX = $event.screenX;
+                " @touchstart.passive="
+                  touchstartX = $event.changedTouches[0].screenX;
+                  touchstartY = $event.changedTouches[0].screenY;
+                " @mouseup.passive="
+                  touchendX = $event.screenX;
+                  touchendY = $event.screenY;
+                  handleGesture();
+                " @touchend.passive="
+                  touchendX = $event.changedTouches[0].screenX;
+                  touchendY = $event.changedTouches[0].screenY;
+                  handleGesture();
+                ">
+          <!-- BUTTON LEFT -->
+          <button @click="
+                        moveSlideLeftSm();
+                      " x-show="currentSlide > 0"
+            class="absolute p-3 h-12 w-12 rounded-full bg-[#ff0020] bg-opacity-30 text-white z-10 left-0 lg:left-[7%] top-1/2"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" aria-hidden="true" data-testid="dynamic-hero-icon"
+              class="w-6 h-6 right-px relative">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <!-- BUTTON RIGHT -->
+          <button @click="
+                        moveSlideRightSm();
+                      " x-show="currentSlide < numberOfSlides"
+            class="absolute p-3 h-12 w-12 rounded-full bg-[#ff0020] bg-opacity-30 text-white z-10 right-0 lg:right-[7%] top-1/2"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" aria-hidden="true" data-testid="dynamic-hero-icon" class="w-6 h-6 left-px relative">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+          <!-- SLIDER -->
+          <div class="flex flex-nowrap translate-x-[0] transition-all duration-500" x-ref="testimonialContainerSm"
+            data-id="1">
+            <!-- SLIDE -->
+            <template x-for="(car, index) in cardsData" :key="index">
+              <div class="transition-all duration-500 inline-block shrink-0 w-[100%] py-4 px-8">
+                <!-- CARDS GENERATOR -->
+                <!-- CARD -->
+                <div class="mb-3 transition-all" x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-50">
+                  <article
+                    class="overflow-hidden rounded-md drop-shadow-[0px_0px_5px_rgba(0,0,0,0.1)] bg-[#FFFDFC] text-center transition-all duration-300 hover:-translate-y-[10px]">
+                    <!-- HEADING -->
+                    <div class="relative text-left p-5">
+                      <h2 class="font-['Roboto'] leading-tight text-base xl:text-lg text-[#0b2c3d] font-bold">Premium
+                      </h2>
+                    </div>
+                    <!-- OTHER DETAILS -->
+                    <div class="py-[20px] px-[20px] text-left">
+                      <!-- MPi / T-GDi -->
+                      <div class="text-[14px] leading-[1.75] text-[#0000009e] font-bold">
+                        <span>1.2 MPi</span>
+                        <span>Auto</span>
+                      </div>
+                      <!-- MINOR DETAILS -->
+                      <div class="text-[14px] leading-[1.75] text-[#0000009e] font-semibold">
+                        <span>1.2 litres</span> |
+                        <span>Manual</span> |
+                        <span>Petrol</span> |
+                        <span>5</span> doors
+                      </div>
+                      <!-- INITIAL PRICE -->
+                      <div class="text-sm text-[#0000009e] leading-tight mt-1.5 mb-4">
+                        RRP from <span class="line-through">$16,295</span>
+                      </div>
+                      <!-- MOBWOW PRICE -->
+                      <ul class="border-t border-[#E0E0E0] py-[12px]">
+                        <li class="flex flex-wrap items-center justify-between">
+                          <div class="font-['Roboto'] text-[#0b2c3d] leading-none">
+                            <span class="block mb-0.5 text-sm">
+                              mobwow price from:
+                            </span>
+                            <span class="font-medium text-base">
+                              <span x-text="car.priceMonth"></span>* / month
+                            </span>
+                          </div>
+                          <span class="flex flex-wrap items-center">
+                            <button class="mr-[15px] text-[#9D9C9C] hover:text-[#ff0020]" aria-label="svg">
+                              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M13.1667 11.6667C12.8572 11.6667 12.5605 11.7896 12.3417 12.0084C12.1229 12.2272 12 12.5239 12 12.8334C12 13.1428 12.1229 13.4395 12.3417 13.6583C12.5605 13.8771 12.8572 14 13.1667 14C13.4761 14 13.7728 13.8771 13.9916 13.6583C14.2104 13.4395 14.3333 13.1428 14.3333 12.8334C14.3333 12.5239 14.2104 12.2272 13.9916 12.0084C13.7728 11.7896 13.4761 11.6667 13.1667 11.6667ZM11 12.8334C11 12.2587 11.2283 11.7076 11.6346 11.3013C12.0409 10.895 12.592 10.6667 13.1667 10.6667C13.7413 10.6667 14.2924 10.895 14.6987 11.3013C15.1051 11.7076 15.3333 12.2587 15.3333 12.8334C15.3333 13.408 15.1051 13.9591 14.6987 14.3654C14.2924 14.7717 13.7413 15 13.1667 15C12.592 15 12.0409 14.7717 11.6346 14.3654C11.2283 13.9591 11 13.408 11 12.8334Z"
+                                  fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M9.26984 1.14667C9.36347 1.24042 9.41606 1.3675 9.41606 1.5C9.41606 1.6325 9.36347 1.75958 9.26984 1.85333L8.4565 2.66667H11.1665C11.8295 2.66667 12.4654 2.93006 12.9343 3.3989C13.4031 3.86774 13.6665 4.50363 13.6665 5.16667V11C13.6665 11.1326 13.6138 11.2598 13.5201 11.3536C13.4263 11.4473 13.2991 11.5 13.1665 11.5C13.0339 11.5 12.9067 11.4473 12.813 11.3536C12.7192 11.2598 12.6665 11.1326 12.6665 11V5.16667C12.6665 4.96968 12.6277 4.77463 12.5523 4.59264C12.4769 4.41065 12.3665 4.24529 12.2272 4.10601C12.0879 3.96672 11.9225 3.85623 11.7405 3.78085C11.5585 3.70547 11.3635 3.66667 11.1665 3.66667H8.45717L9.2705 4.48C9.36154 4.57434 9.41188 4.70067 9.41068 4.83177C9.40948 4.96287 9.35683 5.08825 9.26409 5.18091C9.17134 5.27357 9.04591 5.32609 8.91481 5.32717C8.78371 5.32825 8.65743 5.27779 8.56317 5.18667L6.8965 3.52C6.80287 3.42625 6.75028 3.29917 6.75028 3.16667C6.75028 3.03417 6.80287 2.90708 6.8965 2.81333L8.56317 1.14667C8.65692 1.05303 8.784 1.00044 8.9165 1.00044C9.049 1.00044 9.17609 1.05303 9.26984 1.14667ZM2.83317 4.33333C2.98638 4.33333 3.13809 4.30316 3.27963 4.24453C3.42118 4.1859 3.54979 4.09996 3.65813 3.99162C3.76646 3.88329 3.8524 3.75468 3.91103 3.61313C3.96966 3.47158 3.99984 3.31988 3.99984 3.16667C3.99984 3.01346 3.96966 2.86175 3.91103 2.7202C3.8524 2.57866 3.76646 2.45004 3.65813 2.34171C3.54979 2.23337 3.42118 2.14744 3.27963 2.08881C3.13809 2.03018 2.98638 2 2.83317 2C2.52375 2 2.22701 2.12292 2.00821 2.34171C1.78942 2.5605 1.6665 2.85725 1.6665 3.16667C1.6665 3.47609 1.78942 3.77283 2.00821 3.99162C2.22701 4.21042 2.52375 4.33333 2.83317 4.33333ZM4.99984 3.16667C4.99984 3.7413 4.77156 4.2924 4.36524 4.69873C3.95891 5.10506 3.40781 5.33333 2.83317 5.33333C2.25853 5.33333 1.70743 5.10506 1.30111 4.69873C0.894777 4.2924 0.666504 3.7413 0.666504 3.16667C0.666504 2.59203 0.894777 2.04093 1.30111 1.6346C1.70743 1.22827 2.25853 1 2.83317 1C3.40781 1 3.95891 1.22827 4.36524 1.6346C4.77156 2.04093 4.99984 2.59203 4.99984 3.16667Z"
+                                  fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M6.73016 14.8533C6.63653 14.7596 6.58394 14.6325 6.58394 14.5C6.58394 14.3675 6.63653 14.2404 6.73016 14.1467L7.5435 13.3333H4.8335C4.17046 13.3333 3.53457 13.0699 3.06573 12.6011C2.59689 12.1323 2.3335 11.4964 2.3335 10.8333V5C2.3335 4.86739 2.38617 4.74021 2.47994 4.64645C2.57371 4.55268 2.70089 4.5 2.8335 4.5C2.9661 4.5 3.09328 4.55268 3.18705 4.64645C3.28082 4.74021 3.3335 4.86739 3.3335 5V10.8333C3.3335 11.2312 3.49153 11.6127 3.77284 11.894C4.05414 12.1753 4.43567 12.3333 4.8335 12.3333H7.54283L6.7295 11.52C6.68176 11.4739 6.6437 11.4187 6.61752 11.3576C6.59135 11.2966 6.57759 11.231 6.57704 11.1646C6.5765 11.0982 6.58918 11.0324 6.61435 10.971C6.63952 10.9095 6.67667 10.8537 6.72364 10.8068C6.77061 10.7599 6.82645 10.7228 6.88791 10.6977C6.94937 10.6726 7.01521 10.6599 7.0816 10.6605C7.14799 10.6612 7.2136 10.675 7.27459 10.7012C7.33557 10.7274 7.39073 10.7656 7.43683 10.8133L9.1035 12.48C9.19713 12.5738 9.24972 12.7008 9.24972 12.8333C9.24972 12.9658 9.19713 13.0929 9.1035 13.1867L7.43683 14.8533C7.34308 14.947 7.216 14.9996 7.0835 14.9996C6.951 14.9996 6.82391 14.947 6.73016 14.8533Z"
+                                  fill="currentColor"></path>
+                              </svg>
+                            </button>
+                            <button class="text-[#9D9C9C] hover:text-[#ff0020]" aria-label="svg">
+                              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(.clip0_656_640)">
+                                  <path
+                                    d="M7.9999 2.74799L7.2829 2.01099C5.5999 0.280988 2.5139 0.877988 1.39989 3.05299C0.876895 4.07599 0.758895 5.55299 1.71389 7.43799C2.63389 9.25299 4.5479 11.427 7.9999 13.795C11.4519 11.427 13.3649 9.25299 14.2859 7.43799C15.2409 5.55199 15.1239 4.07599 14.5999 3.05299C13.4859 0.877988 10.3999 0.279988 8.7169 2.00999L7.9999 2.74799ZM7.9999 15C-7.33311 4.86799 3.27889 -3.04001 7.82389 1.14299C7.88389 1.19799 7.94289 1.25499 7.9999 1.31399C8.05632 1.25504 8.11503 1.19833 8.17589 1.14399C12.7199 -3.04201 23.3329 4.86699 7.9999 15Z"
+                                    fill="currentColor"></path>
+                                </g>
+                                <defs>
+                                  <clipPath class="clip0_656_640">
+                                    <rect width="16" height="16" fill="white"></rect>
+                                  </clipPath>
+                                </defs>
+                              </svg>
+                            </button>
+                          </span>
+                        </li>
+                        <li class="text-sm mt-1 text-[#0000009e]" x-text="car.price"></li>
+                      </ul>
+                      <!-- DEALS BUTTON -->
+                      <div class="border-t border-[#E0E0E0] py-[12px]">
+                        <a :href="car.url"
+                          class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-white before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-white hover:text-[#ff0020] block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-[#ff0020]  after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
+                          Find deals
+                        </a>
+                      </div>
+                      <!-- MORE DETAILS -->
+                      <div class="border-t border-[#E0E0E0] py-[12px]">
+                        <!-- SHOW DETAILS BUTTON -->
+                        <button @click.prevent="showDetails = !showDetails"
+                          class="transition-all outline-none border-none leading-none px-[20px] pt-[15px] uppercase font-medium text-[#ff0020] text-sm w-full text-center mx-auto flex items-center justify-center">
+                          <span x-text="showDetails ? 'hide' : 'show'"></span>&nbsp;details
+                          <!-- CHEVRON DOWN -->
+                          <span class="ml-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                              stroke="currentColor" class="w-4 h-4 transition-transform"
+                              :class="{'rotate-180' : showDetails}">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                          </span>
+                        </button>
+                        <!-- DETAILS -->
+                        <div class="mt-5" x-show="showDetails" x-transition>
+                          <!-- DESCROPTION -->
+                          <div class="mb-10">
+                            <h3
+                              class="font-['Roboto'] leading-tight text-base xl:text-lg text-[#0b2c3d] font-bold mb-2">
+                              Description
+                            </h3>
+                            <p class=" text-base leading-snug text-[#0000009e]">
+                              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero eaque praesentium dolor
+                              labore veritatis! Dolores, nulla nesciunt.
+                            </p>
+                          </div>
+                          <!-- KEY INFO -->
+                          <div class="mb-10">
+                            <h3
+                              class="font-['Roboto'] leading-tight text-base xl:text-lg text-[#0b2c3d] font-bold mb-2">
+                              Key information
+                            </h3>
+                            <ul>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Engine size</span>
+                                <span class="font-bold">1.2 Litres</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Engine power</span>
+                                <span class="font-bold">84 bhp</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Transmition</span>
+                                <span class="font-bold">Automatic</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Doors</span>
+                                <span class="font-bold">5</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Seats</span>
+                                <span class="font-bold">5</span>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- STATS INFO -->
+                          <div class="mb-10">
+                            <h3
+                              class="font-['Roboto'] leading-tight text-base xl:text-lg text-[#0b2c3d] font-bold mb-2">
+                              Stats & performance
+                            </h3>
+                            <ul>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Co2 emissions</span>
+                                <span class="font-bold">124.0 g/km</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Emissions standards</span>
+                                <span class="font-bold">euro-6</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">First year road tax</span>
+                                <span class="font-bold">£190</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Insurance group</span>
+                                <span class="font-bold">8E</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Consumption</span>
+                                <span class="font-bold">52.3 mpg</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Acceleration (0 - 62mph)</span>
+                                <span class="font-bold">12.6 s</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Top speed</span>
+                                <span class="font-bold">106 mph</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Boot (seats up)</span>
+                                <span class="font-bold">252 litres</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Boot (seats down)</span>
+                                <span class="font-bold">1,050 litres</span>
+                              </li>
+                              <li
+                                class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                <span class="">Safety rating</span>
+                                <!-- SAFETY STARS -->
+                                <div
+                                  class="mb-2 text-xl cursor-default inline-block font-bold bg-clip-text text-transparent bg-[linear-gradient(90deg,#ff0020_60%,#dedede_0)]"
+                                  :class="{
+                                                'bg-[linear-gradient(90deg,#ff0020_20%,#dedede_0)]' : car.review === 1,
+                                                'bg-[linear-gradient(90deg,#ff0020_30%,#dedede_0)]' : car.review === 1.5,
+                                                'bg-[linear-gradient(90deg,#ff0020_40%,#dedede_0)]' : car.review === 2,
+                                                'bg-[linear-gradient(90deg,#ff0020_50%,#dedede_0)]' : car.review === 2.5,
+                                                'bg-[linear-gradient(90deg,#ff0020_60%,#dedede_0)]' : car.review === 3,
+                                                'bg-[linear-gradient(90deg,#ff0020_70%,#dedede_0)]' : car.review === 3.5,
+                                                'bg-[linear-gradient(90deg,#ff0020_80%,#dedede_0)]' : car.review === 4,
+                                                'bg-[linear-gradient(90deg,#ff0020_90%,#dedede_0)]' : car.review === 4.5,
+                                                'bg-[linear-gradient(90deg,#ff0020_100%,#dedede_0)]' : car.review === 5,
+                                                }">
+                                  ★★★★★
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- OTHER DROPDOWNS -->
+                          <div class="mb-10" x-data="{
+                                          dropdowns: [
+                                            {
+                                              title: 'Drive convenience',
+                                              bulletPoints: [
+                                                'Fast read/unread filtering',
+                                                'Search encrypted content',
+                                                'Email archiving',
+                                                'Email starring',
+                                                'Read receipts',
+                                                'Export emails to EML',
+                                                'Advanced search',
+                                                'Rapid filter creation',
+                                                'Advanced inbox sorting'
+                                              ],
+                                              isOpen: false,
+                                            },
+                                            {
+                                              title: 'Entertainment',
+                                              bulletPoints: [
+                                                'Dynamic aliases',
+                                                'Dark mode',
+                                                'Customizable inbox theme and colors',
+                                                'Multi-user support and sub-accounts',
+                                                'Customizable inbox layout',
+                                                'Email & mobile signatures',
+                                                'Threading and non-threaded modes',
+                                                'Multiple addresses',
+                                                'Support for 20+ languages',
+                                                'Right-to-left composer support',
+                                                'Plain and rich text email composers',
+                                                'Custom time zones and formats'
+                                              ],
+                                              isOpen: false,
+                                            },
+                                            {
+                                              title: 'Exterior Features',
+                                              bulletPoints: [
+                                                '1-click email and calendar import from Gmail',
+                                                'Password-protected Emails',
+                                                'Enhanced tracking protection',
+                                                'PhishGuard protection',
+                                                'Link protection',
+                                                'Send expiring emails',
+                                                'Address verification',
+                                                'Key pinning',
+                                              ],
+                                              isOpen: false,
+                                            },
+                                            {
+                                              title: 'Interior Features',
+                                              bulletPoints: [
+                                                'Adaptive spam filters',
+                                                'Undo sending',
+                                                'Automatic PGP interoperability',
+                                                'Email typo warnings',
+                                                'Missing attachment detection',
+                                                'Email block and allow lists',
+                                                'Download all attachments',
+                                                'Auto-reply',
+                                                'Catch-all address',
+                                                'Undo move',
+                                                'Browser notifications'
+                                              ],
+                                              isOpen: false,
+                                            },
+                                            {
+                                              title: 'Passive Safety',
+                                              bulletPoints: [
+                                                '1-click contact import from Gmail',
+                                                'Contact import via CSV',
+                                                'Import contacts on mobile',
+                                                'Merge contacts tool',
+                                              ],
+                                              isOpen: false,
+                                            },
+                                            {
+                                              title: 'Security',
+                                              bulletPoints: [
+                                                '1-click contact import from Gmail',
+                                                'Contact import via CSV',
+                                                'Import contacts on mobile',
+                                                'Merge contacts tool',
+                                              ],
+                                              isOpen: false,
+                                            },
+                                            {
+                                              title: 'Wheels',
+                                              bulletPoints: [
+                                                '1-click contact import from Gmail',
+                                                'Contact import via CSV',
+                                                'Import contacts on mobile',
+                                                'Merge contacts tool',
+                                              ],
+                                              isOpen: false,
+                                            },
+                                        ] 
+                                        }">
+                            <ul>
+                              <template x-for="dropdown in dropdowns" x-key="dropdown.title">
+                                <li
+                                  class="text-base leading-snug text-[#0000009e] flex items-center justify-between border-b border-[#E0E0E0] py-2.5">
+                                  <!-- DROPDOWN -->
+                                  <div class="p-0 mt-2 rounded-2xl w-full">
+                                    <!-- DROPDOWN BUTTON -->
+                                    <button type="button" @click="dropdown.isOpen = !dropdown.isOpen"
+                                      class="group rounded-xl flex justify-between items-center w-full text-left focus:outline-none">
+                                      <span class="text-lg font-bold" x-text="dropdown.title"></span>
+                                      <span
+                                        class="bg-[#efebff] text-[#ff0020] rounded-full group-focus:text-[#ff0020] group-focus:bg-[#efebff] group-hover:bg-[#f7f5ff] lg:group-hover:bg-[#efebff] group-hover:text-[#ff0020] lg:group-hover:text-[#ff0020] group-focus-visible:bg-purple-50 group-focus-visible:text-[#ff0020] p-1 ml-6 self-start">
+                                        <!-- SVG PLUS -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                          class="w-6 h-6" x-show="!dropdown.isOpen">
+                                          <path fill-rule="evenodd"
+                                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                            clip-rule="evenodd"></path>
+                                        </svg>
+                                        <!-- SVG MINUS -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                          class="w-6 h-6" x-show="dropdown.isOpen">
+                                          <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                            clip-rule="evenodd"></path>
+                                        </svg>
+                                      </span>
+                                    </button>
+                                    <!-- DROPDOWN CONTENT -->
+                                    <div class="p-6 text-base flex-col space-y-5 items-start flex"
+                                      x-show="dropdown.isOpen">
+                                      <ul class="list-disc space-y-2 px-6">
+                                        <template x-for="item in dropdown.bulletPoints">
+                                          <li x-text="item"></li>
+                                        </template>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </li>
+                              </template>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <!-- SLIDER NAVIGATION -->
+        <ul class="sticky align-center justify-center flex flex-nowrap w-full space-x-2 mt-16 left-0"
+          x-ref="paginationSm">
+          <template x-for="i in numberOfItems">
+            <li
+              class="h-1 rounded-full bg-[#e2dbff] inline-block w-8 hover:ring-4 hover:ring-[#efebff] hover:bg-[#ff0020]/30"
+              :id="$id('b')" @click="
+                              if(+$el.id.substr(2) === 1){
+                                $refs.testimonialContainerSm.style.transform = `translateX(0%)`
+                                $refs.testimonialContainerSm.dataset.id = 1;
+                              }else{
+                                $refs.testimonialContainerSm.style.transform = `translateX(-${(Array.from($el.parentElement.children).indexOf($el) - 1) * 100}%)`
+                                $refs.testimonialContainerSm.dataset.id = +$el.id.substr(2);
+                              }
+                              currentSlide = $refs.testimonialContainerSm.dataset.id - 1;
+                              Array.from($el.parentElement.children).forEach(el => {
+                                el.classList.remove('w-16', 'bg-[#ff0020]');
+                                el.classList.add('w-8', 'bg-[#e2dbff]');
+                              })
+                              $el.classList.remove('w-8', 'bg-[#e2dbff]');
+                              $el.classList.add('w-16', 'bg-[#ff0020]');
+                            "></li>
+          </template>
+        </ul>
+      </div>
+    </section>
+    <!-- RESULTS SECTION END -->
+    <!-- FOOTER START -->
+    <footer class="container mx-auto max-w-[1200px] px-5 font-['Roboto'] text-[#494949] text-center pb-16">
+      <!-- DISCLAIMER -->
+      <span class="text-sm">
+        Please contact the dealer for a personalised quote, including terms and conditions. Quote is subject to dealer
+        requirements, including status and availability. Illustrations are based on personal contract hire, 9 month
+        upfront fee,
+        48 month term, 8000 miles annually, inc VAT, excluding fees. T&Cs apply.
+      </span>
+    </footer>
+    <!-- FOOTER END -->
+  </main>
+  <!-- MAIN CONTAINER END -->
+</body>
+
+</html>
