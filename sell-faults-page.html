@@ -56,27 +56,19 @@
       <section
         class="container mx-auto px-[15px] xl:max-w-[1200px] py-8"
         x-data="{
-        progress: 31,
-        lastServices: [
+        progress: 36,
+        faults: [
           {
-            title: 'Under 6 months ago',
-            id: '6months',
+            title: 'No faults',
+            id: 'noFaults',
           },
           {
-            title: 'Less than 12 months ago',
-            id: 'lessThan12Months',
+            title: 'A few minor faults - but they dont have any impact on the cars safety',
+            id: 'minorFaults',
           },
           {
-            title: '1 - 2 years ago',
-            id: '1to2Years',
-          },
-          {
-            title: '2 - 3 years ago',
-            id: '2to3Years',
-          },
-          {
-            title: 'Over 3 years ago',
-            id: 'over3Years',
+            title: 'Some serious faults that are impacting or could impact the cars safety',
+            id: 'seriousFaults',
           },
         ]
       }">
@@ -84,7 +76,7 @@
         <div class="flex w-full md:max-w-[60%] justify-between">
           <!-- BREADCRUMB -->
           <a
-            href="sell-service-history-page.html"
+            href="sell-last-service-page.html"
             class="capitalize inline-flex items-center underline text-gray-700 transition-all hover:text-[#ff0020]">
             <span>
               <svg
@@ -118,34 +110,34 @@
         <div class="py-8">
           <h1
             class="text-3xl md:text-4xl tracking-tight font-bold font-['Roboto'] my-2 max-w-2xl">
-            When was your car last serviced?
+            Any driving or mechanical faults on your car?
           </h1>
         </div>
 
-        <!-- CAR LAST SERVICE FORM -->
+        <!-- CAR FAULTS FORM -->
         <div class="pb-20">
           <form>
             <ul
               class="flex flex-wrap gap-y-2 gap-x-3 w-full md:max-w-[60%]">
               <template
-                x-for="(service, index) in lastServices"
+                x-for="(fault, index) in faults"
                 :key="index">
                 <li class="basis-full">
                   <div class="relative w-full flex">
                     <input
                       type="radio"
-                      name="lastServices"
-                      :id="service.id"
-                      :value="service.title"
+                      name="faults"
+                      :id="fault.id"
+                      :value="fault.title"
                       class="absolute h-6 w-6 bg-white rounded cursor-pointer ml-3 top-1/2 -translate-y-1/2 inline-block peer checked:accent-[#ff0020]" />
                     <label
-                      :for="service.id"
+                      :for="fault.id"
                       class="cursor-pointer peer-checked:text-[#ff0020] peer-checked:border-[#ff0020] peer-checked:bg-[#ff0020]/10 border border-[#616161] hover:border-black transition-all rounded-xl w-full h-full bg-white p-3 pl-11 text-[#000000de]">
                       <span
                         class="flex flex-col justify-center items-start text-left">
                         <span
                           class="text-inherit capitalize select-none"
-                          x-text="service.title"></span>
+                          x-text="fault.title"></span>
                       </span>
                     </label>
                   </div>
@@ -160,7 +152,7 @@
             <div
               class="border-t border-[#0000001f] w-full md:max-w-[60%] flex py-4 gap-4 bg-white">
               <a
-                href="sell-faults-page.html"
+                href="buy-brands-page.html"
                 class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-white before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-white hover:text-[#ff0020] block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-[#ff0020] after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
                 continue
               </a>
