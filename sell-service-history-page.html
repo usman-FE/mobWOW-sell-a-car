@@ -27,7 +27,7 @@
       defer
       src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
 
-    <title>Value my car | mobWOW</title>
+    <title>mobWOW | Car Discovry</title>
   </head>
 
   <body>
@@ -56,35 +56,36 @@
       <section
         class="container mx-auto px-[15px] xl:max-w-[1200px] py-8"
         x-data="{
-        progress: 18,
-        features: [
+        progress: 22,
+        serviceHistories: [
           {
-            name: '2 or more keys',
-            id: 'keys'
+            title: 'Full',
+            id: 'full',
+            description: 'The car has been serviced in line with the manufacturers standards and comes with all the relevant documentation.'
           },
           {
-            name: 'sunroof',
-            id: 'sunroof'
+            title: 'Partial',
+            id: 'partial',
+            description: 'The car is missing one or more service records but has some service history (main dealer or independent) with the relevant documentation.'
           },
           {
-            name: 'Sat Nav',
-            id: 'sat-nav'
+            title: 'None',
+            id: 'none',
+            description: 'The car has no service records.'
           },
           {
-            name: 'Leather interior',
-            id: 'leather-interior'
+            title: 'Not due yet',
+            id: 'notDue',
+            description: 'First service not due yet'
           },
-          {
-            name: '7 seats',
-            id: 'seats'
-          },
+          
         ]
       }">
         <!-- BREADCRUMBS & PROGRESS -->
         <div class="flex w-full md:max-w-[60%] justify-between">
           <!-- BREADCRUMB -->
           <a
-            href="sell-questionnaire-page.html"
+            href="sell-features-page.html"
             class="capitalize inline-flex items-center underline text-gray-700 transition-all hover:text-[#ff0020]">
             <span>
               <svg
@@ -118,57 +119,43 @@
         <div class="py-8">
           <h1
             class="text-3xl md:text-4xl tracking-tight font-bold font-['Roboto'] my-2 max-w-2xl">
-            Select any features that your car has
+            How much service history does your car have?
           </h1>
         </div>
 
-        <!-- CAR FEATURES FORM -->
+        <!-- CAR SERVICE HISTORY FORM -->
         <div class="pb-20">
           <form>
             <ul
               class="flex flex-wrap gap-y-2 gap-x-3 w-full md:max-w-[60%]">
               <template
-                x-for="(feature, index) in features"
+                x-for="(service, index) in serviceHistories"
                 :key="index">
                 <li class="basis-full">
                   <div class="relative w-full flex">
                     <input
-                      type="checkbox"
-                      :name="feature.id"
-                      :id="feature.id"
-                      :value="feature.id"
+                      type="radio"
+                      name="serviceHistories"
+                      :id="service.id"
+                      :value="service.title"
                       class="absolute h-6 w-6 bg-white rounded cursor-pointer ml-3 top-1/2 -translate-y-1/2 inline-block peer checked:accent-[#ff0020]" />
                     <label
-                      :for="feature.id"
+                      :for="service.id"
                       class="cursor-pointer peer-checked:text-[#ff0020] peer-checked:border-[#ff0020] peer-checked:bg-[#ff0020]/10 border border-[#616161] hover:border-black transition-all rounded-xl w-full h-full bg-white p-3 pl-11 text-[#000000de]">
                       <span
                         class="flex flex-col justify-center items-start text-left">
                         <span
-                          class="text-inherit capitalize select-none"
-                          x-text="feature.name"></span>
+                          class="text-inherit capitalize select-none mb-1 font-bold"
+                          x-text="service.title"></span>
+                        <p
+                          class="capitalize select-none text-[#0000009e] font-semibold"
+                          x-text="service.description"></p>
                       </span>
                     </label>
                   </div>
                 </li>
               </template>
             </ul>
-
-            <!-- MODIFICATION PROMPT -->
-            <div class="mt-8 w-full md:max-w-[60%]">
-              <h1
-                class="text-xl md:text-2xl tracking-tight font-bold font-['Roboto'] my-2 max-w-2xl">
-                Anything else you’d like to mention?
-              </h1>
-              <p class="text-[#0000009e] text-lg max-w-2xl mb-8">
-                This helps narrow down our recommendations. You can
-                customise your car with additional equipment later.
-              </p>
-              <textarea
-                name="modification"
-                id="modification"
-                class="w-full h-40 resize-y block py-2.5 px-3 border border-[#0000001f] text-[#000000de] bg-white rounded-md hover:border-black transition-all outline-[#ff0020]"
-                placeholder="E.g. Heated seats, Matt black paint, etc."></textarea>
-            </div>
           </form>
         </div>
         <!-- FOOTER -->
@@ -177,9 +164,9 @@
             <div
               class="border-t border-[#0000001f] w-full md:max-w-[60%] flex py-4 gap-4 bg-white">
               <a
-                href="sell-service-history-page.html"
+                href="buy-brands-page.html"
                 class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-white before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-white hover:text-[#ff0020] block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-[#ff0020] after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
-                Continue
+                continue
               </a>
             </div>
           </div>
