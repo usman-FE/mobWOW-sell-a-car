@@ -606,6 +606,10 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -656,10 +660,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
 }
 
 .block {
@@ -1124,12 +1124,6 @@ video {
   width: 0px;
 }
 
-.before\:bg-\[\#ff0020\]::before {
-  content: var(--tw-content);
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 0 32 / var(--tw-bg-opacity));
-}
-
 .before\:bg-white::before {
   content: var(--tw-content);
   --tw-bg-opacity: 1;
@@ -1177,12 +1171,6 @@ video {
   background-color: rgb(255 0 32 / var(--tw-bg-opacity));
 }
 
-.after\:bg-white::after {
-  content: var(--tw-content);
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .after\:transition-all::after {
   content: var(--tw-content);
   transition-property: all;
@@ -1207,11 +1195,6 @@ video {
 .hover\:text-\[\#ff0020\]:hover {
   --tw-text-opacity: 1;
   color: rgb(255 0 32 / var(--tw-text-opacity));
-}
-
-.hover\:text-white:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .hover\:before\:left-0:hover::before {
