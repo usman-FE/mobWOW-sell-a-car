@@ -56,19 +56,23 @@
       <section
         class="container mx-auto px-[15px] xl:max-w-[1200px] py-8"
         x-data="{
-        progress: 40,
-        warnings: [
+        progress: 45,
+        windscreenDamages: [
           {
-            title: 'No warning lights',
+            title: 'No damage',
             id: 'no',
           },
           {
-            title: 'Minor e.g. service light, bulb warning',
+            title: '1 or 2 very minor chips',
             id: 'minor',
           },
           {
-            title: 'Major e.g. brake system/fluid, airbags, power steering, etc',
+            title: '1 or more major chips or scraches',
             id: 'major',
+          },
+          {
+            title: 'More damage than described above',
+            id: 'custom',
           },
         ]
       }">
@@ -76,7 +80,7 @@
         <div class="flex w-full md:max-w-[60%] justify-between">
           <!-- BREADCRUMB -->
           <a
-            href="sell-faults-page.html"
+            href="sell-warnings-page.html"
             class="capitalize inline-flex items-center underline text-gray-700 transition-all hover:text-[#ff0020]">
             <span>
               <svg
@@ -110,7 +114,7 @@
         <div class="py-8">
           <h1
             class="text-3xl md:text-4xl tracking-tight font-bold font-['Roboto'] my-2 max-w-2xl">
-            Any warning lights displayed on your car?
+            Any damage to the windscreen?
           </h1>
         </div>
 
@@ -120,24 +124,24 @@
             <ul
               class="flex flex-wrap gap-y-2 gap-x-3 w-full md:max-w-[60%]">
               <template
-                x-for="(warning, index) in warnings"
+                x-for="(damage, index) in windscreenDamages"
                 :key="index">
                 <li class="basis-full">
                   <div class="relative w-full flex">
                     <input
                       type="radio"
-                      name="warnings"
-                      :id="warning.id"
-                      :value="warning.title"
+                      name="windscreenDamages"
+                      :id="damage.id"
+                      :value="damage.title"
                       class="absolute h-6 w-6 bg-white rounded cursor-pointer ml-3 top-1/2 -translate-y-1/2 inline-block peer checked:accent-[#ff0020]" />
                     <label
-                      :for="warning.id"
+                      :for="damage.id"
                       class="cursor-pointer peer-checked:text-[#ff0020] peer-checked:border-[#ff0020] peer-checked:bg-[#ff0020]/10 border border-[#616161] hover:border-black transition-all rounded-xl w-full h-full bg-white p-3 pl-11 text-[#000000de]">
                       <span
                         class="flex flex-col justify-center items-start text-left">
                         <span
-                          class="text-inherit capitalize select-none"
-                          x-text="warning.title"></span>
+                          class="text-inherit select-none"
+                          x-text="damage.title"></span>
                       </span>
                     </label>
                   </div>
@@ -152,7 +156,7 @@
             <div
               class="border-t border-[#0000001f] w-full md:max-w-[60%] flex py-4 gap-4 bg-white">
               <a
-                href="sell-windscreen-page.html"
+                href="#"
                 class="drop-shadow-lg z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-white before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all before:duration-300 transition-all duration-300 leading-none px-[20px] py-[15px] uppercase font-medium text-white hover:text-[#ff0020] block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-[#ff0020] after:transition-all border border-[#ff0020] hover:border-[#ff0020] basis-full text-center">
                 continue
               </a>
