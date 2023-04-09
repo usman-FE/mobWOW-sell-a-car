@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="./dist/main.css" />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet" />
+
+    <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> -->
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>
+
+    <title>mobWOW | Sell my car</title>
+  </head>
+
+  <body>
+    <!-- MAIN CONTAINER START -->
+    <main class="h-full">
+      <!-- header menu -->
+      <header
+        x-data="{
+        atTop : false, 
+        sideNav: false,
+        bodyOverflow: function (modal) {
+          document.querySelector('body').classList.remove('overflow-hidden', 'overflow-visible');
+          document.querySelector('body').classList.add(modal ? 'overflow-hidden' : 'overflow-visible');
+        }
+      }"
+        class="header relative z-40"
+        @scroll.window="
+      if(window.pageYOffset > $el.offsetHeight){
+        atTop = true;
+      }else{
+        atTop = false;
+      }
+    ">
+        <div
+          class="w-full backdrop-blur-[1px] left-0 top-0 transition-all duration-300 fixed text-white shadow-lg z-20"
+          :class="[
+            atTop ? 'py-2' : 'py-4',
+            atTop ? 'bg-white' : ''
+            ]">
+          <div
+            class="container mx-auto px-[15px] xl:max-w-[1200px] relative z-10">
+            <div
+              class="nav__wrapper flex items-center justify-between">
+              <div class="nav__brand">
+                <a
+                  class="w-32 block"
+                  href="#">
+                  <img
+                    src="images/mobWOW-Base-Logo-Red (2).svg"
+                    class="w-full h-auto"
+                    alt="" />
+                </a>
+              </div>
+              <div
+                x-data='{
+            selectedMenu: null,
+            menus: [
+              {
+                id: 2,
+                label: "sell cars",
+                url: "#"
+              },
+              {
+                id: 3,
+                label: "buy cars",
+                url: "#"
+              },
+              {
+                id: 4,
+                label: "win cars",
+                url: "#"
+              },
+              {
+                id: 8,
+                label: "rent cars",
+                url: "#"
+              },
+              {
+                id: 6,
+                label: "Blog",
+                url: "blog",
+                submenu: [
+                  {
+                    id: 1,
+                    label: "Blog Post 1",
+                    url: "#"
+                  },
+                  {
+                    id: 2,
+                    label: "Blog Post 2",
+                    url: "#"
+                  },
+                  {
+                    id: 3,
+                    label: "Blog Post 3",
+                    url: "#"
+                  },
+                  {
+                    id: 4,
+                    label: "Blog Post 4",
+                    url: "#"
+                  },
+                  {
+                    id: 5,
+                    label: "Blog Post 5",
+                    url: "#"
+                  },
+                  {
+                    id: 6,
+                    label: "Blog Post 6",
+                    url: "#"
+                  },
+                  {
+                    id: 7,
+                    label: "Blog Post 7",
+                    url: "#"
+                  },
+                  {
+                    id: 8,
+                    label: "Blog Post 8",
+                    url: "#"
+                  }
+                ]
+              }
+            ]
+          }'
+                class="nav__wrapper fixed lg:static w-full h-screen lg:h-auto left-0 top-0 flex justify-end lg:block bg-gray-900 lg:bg-transparent bg-opacity-40 transition-all duration-300 ease-[ease] z-20"
+                :class="sideNav ? 'visible' : 'invisible lg:visible'">
+                <div
+                  @click="sideNav = false; bodyOverflow(sideNav)"
+                  class="flex-1 h-full lg:hidden cursor-pointer"></div>
+                <nav
+                  class="nav__menu flex-none w-80 lg:w-full h-full lg:h-auto lg:flex lg:items-center lg:justify-end bg-[#ff0020] lg:bg-transparent transition-all duration-300 ease-[ease] shadow-md lg:shadow-none"
+                  :class="sideNav ? 'mr-0' : '-mr-80'">
+                  <ul
+                    class="menu lg:flex lg:space-x-8 list-none px-8 lg:px-0 py-16 lg:py-0">
+                    <template
+                      x-for="(menu, index) in menus"
+                      :key="menu.id">
+                      <li
+                        @click="selectedMenu !== index ? selectedMenu = index : selectedMenu = null"
+                        class="menu__item relative group transition duration-300 ease-[ease] after:absolute after:content-[''] after:w-full after:origin-left after:scale-x-0 hover:after:scale-x-100 after:left-0 after:bottom-0 lg:after:h-[2px] after:bg-[#ff0020] after:transition after:duration-300 after:ease-[ease] cursor-pointer font-semibold">
+                        <template x-if="!menu.submenu">
+                          <a
+                            class="menu__item-link block text-sm uppercase py-2"
+                            :class="!atTop ? 'text-white ' : 'text-white lg:text-gray-700'"
+                            :href="menu.url"
+                            x-text="menu.label"></a>
+                        </template>
+
+                        <template x-if="menu.submenu">
+                          <div>
+                            <button
+                              class="w-full flex items-center justify-between lg:justify-start cursor-pointer focus:outline-none"
+                              :class="!atTop ? 'text-white' : 'text-white lg:text-gray-700'">
+                              <span
+                                class="menu__link flex-1 text-sm text-current uppercase text-left py-2"
+                                x-text="menu.label"></span>
+                              <svg
+                                class="svg-inline--fa fa-angle-down fa-w-10 fa-2x w-3 h-3 transition duration-300 ease-in-out transform lg:group-hover:-rotate-180 ml-2 mb-1 lg:mb-0"
+                                :class="{'-rotate-90': selectedMenu === index }"
+                                aria-hidden="true"
+                                focusable="false"
+                                data-prefix="far"
+                                data-icon="angle-down"
+                                role="img"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 320 512">
+                                <path
+                                  fill="currentColor"
+                                  d="M151.5 347.8L3.5 201c-4.7-4.7-4.7-12.3 0-17l19.8-19.8c4.7-4.7 12.3-4.7 17 0L160 282.7l119.7-118.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17l-148 146.8c-4.7 4.7-12.3 4.7-17 0z"
+                                  class=""></path>
+                              </svg>
+                            </button>
+                            <ul
+                              class="submenu whitespace-nowrap z-40 list-none lg:bg-white w-full lg:w-52 top-full transition-all duration-300 ease-[ease] origin-top"
+                              :class="{'static lg:absolute visible scale-y-100 opacity-100': selectedMenu === index, 'absolute invisible lg:group-hover:visible scale-y-0 lg:group-hover:scale-y-100 opacity-0 lg:group-hover:opacity-100': selectedMenu !== index }"
+                              aria-hidden="true">
+                              <template
+                                x-for="item in menu.submenu"
+                                :key="item.id">
+                                <li
+                                  class="submenu__item text-sm hover:text-[#ff0020] text-white lg:text-gray-700 hover:bg-gray-100 text-center lg:text-left">
+                                  <a
+                                    class="submenu__item-link block text-current text-left py-2 px-6"
+                                    :href="item.url"
+                                    x-text="item.label"></a>
+                                </li>
+                              </template>
+                            </ul>
+                          </div>
+                        </template>
+                      </li>
+                    </template>
+                  </ul>
+                  <!-- DIVIDER -->
+                  <div
+                    class="hidden lg:block w-px h-8 bg-[#e2dbff] mx-3"></div>
+                  <!-- LOGIN / SIGN UP -->
+                  <div class="flex gap-2 justify-center text-center">
+                    <!-- button 1 -->
+                    <a
+                      href="#"
+                      class="drop-shadow-2xl z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-white before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all leading-none px-[20px] py-[15px] uppercase font-medium text-white hover:text-[#ff0020] block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-[#ff0020] after:transition-all border border-[#ff0020] hover:border-white">
+                      Login
+                    </a>
+                    <!-- button 2 -->
+                    <a
+                      href="#"
+                      class="drop-shadow-2xl z-10 before:block before:absolute before:left-auto before:right-0 before:inset-y-0 before:-z-[1] before:bg-[#ff0020] before:w-0 hover:before:w-full hover:before:left-0 hover:before:right-auto before:transition-all leading-none px-[20px] py-[15px] uppercase font-medium text-[#ff0020] hover:text-white block text-[14px] xl:text-[16px] relative after:block after:absolute after:inset-0 after:-z-[2] after:bg-white after:transition-all border border-[#ff0020] hover:border-[#ff0020]">
+                      Sign up
+                    </a>
+                  </div>
+                </nav>
+              </div>
+              <div class="lg:hidden">
+                <div
+                  class="nav__toggle h-8 flex items-center justify-end">
+                  <button
+                    @click="sideNav = !sideNav; bodyOverflow(sideNav)"
+                    class="cursor-pointer h-10 flex items-center justify-center outline-none focus:outline-none px-3 mr-2 z-50 text-white border"
+                    :class="{
+                     'text-black border-black': atTop,
+                     'text-white border-white': !atTop 
+                  }">
+                    <span
+                      x-show="!sideNav"
+                      class="text-sm"
+                      >MENU</span
+                    >
+                    <svg
+                      x-show="sideNav"
+                      class="w-6 h-6 fill-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 320 512">
+                      <path
+                        d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- HEADER END -->
+
+      <!-- BANNER -->
+      <section class="pb-6">
+        <div class="relative px-4 md:px-8">
+          <div
+            class="absolute inset-y-0 w-5/6 xl:w-3/4 right-0 flex-grow">
+            <div
+              class="z-10 bg-slate-900/20 absolute w-full h-full"></div>
+            <img
+              class="absolute inset-0 object-cover w-full h-full"
+              src="images/pexels-lee-chinyama-9162116.jpg"
+              alt="hero" />
+          </div>
+          <div
+            class="relative py-24 lg:pt-28 lg:pb-16 z-30 -mx-4 md:mx-0">
+            <div class="relative inline-flex px-4 md:px-0">
+              <div
+                class="w-screen left-0 right-0 md:left-auto md:right-[-8rem] inset-y-0 absolute bg-[#ff0020]"></div>
+              <div
+                class="relative max-w-3xl inline-flex sm:flex-shrink-0 flex-col items-start py-16 sm:py-20 lg:py-24 text-white">
+                <h2
+                  class="font-semibold text-4xl md:text-5xl xl:text-7xl !leading-[110%]">
+                  Sell my car
+                </h2>
+                <p
+                  class="text-white font-['Roboto'] mt-5 text-lg max-w-md">
+                  The free, easy way to get thousands of dealers all
+                  over the world bidding on your car
+                </p>
+                <div class="container mx-auto mt-16">
+                  <form
+                    class="w-full grid md:grid-cols-2 bg-white max-w-md mx-auto rounded-lg shadow-xl dark:shadow-2xl overflow-hidden">
+                    <!-- REGISTRATION NUMBER -->
+                    <div class="border-b border-r relative">
+                      <img
+                        src="images/search-grey.svg"
+                        alt=""
+                        class="hidden sm:block h-6 absolute left-3 top-2/4 -translate-y-1/2 opacity-50 max-w-full" />
+                      <input
+                        type="text"
+                        name="registration"
+                        id="registration"
+                        placeholder="Enter Reg"
+                        class="text-[#766d66] font-['Roboto',_sans-serif] h-12 md:h-14 bg-white p-2.5 sm:pl-12 outline-none focus:outline-none text-base sm:text-xl w-full" />
+                    </div>
+                    <!-- SELL CAR BUTTON -->
+                    <div class="border-b border-r relative p-1">
+                      <button
+                        type="submit"
+                        class="w-full h-full px-3 py-2 md:py-3 whitespace-nowrap rounded-md ease-[cubic-bezier(.4,0,.2,1)] transition-all uppercase text-[15px] bg-[#ff0020] text-white inline-flex items-center justify-center font-['Roboto',_sans-serif] font-normal tracking-wider hover:bg-[#df1732]">
+                        Sell my car
+                        <span class="ml-1">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            class="w-5 h-5">
+                            <path
+                              fill-rule="evenodd"
+                              d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                              clip-rule="evenodd"></path>
+                          </svg>
+                        </span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END OF BANNER -->
+
+      <!-- HOW TO SELL SECTION START -->
+      <section class="bg-[#f7f5ff]">
+        <div class="container mx-auto px-[15px] xl:max-w-[1200px]">
+          <!-- SECTION HEADING BOX -->
+          <div
+            class="lg:pt-10 pt-4 flex flex-col text-left items-start">
+            <!-- SECTION HEADING -->
+            <h2
+              class="max-w-[33.75rem] text-3xl sm:text-4xl md:text-[2.7rem] !leading-tight lg:max-w-[45.625rem] text-black mb-2">
+              How to sell a car with mobwow
+            </h2>
+            <!-- DIVIDER -->
+            <hr
+              class="w-12 h-1.5 rounded-full border-none mb-6 bg-[#ff0020]" />
+          </div>
+          <!-- HOW TO CARDS -->
+          <div
+            x-data="{
+              howTo: [
+                {
+                  heading: '1. Tell us about your car',
+                  description: 'Add some basic details about your car and start receiving free car valuations within minutes – there are no hidden fees or costs.',
+                  icon: 'images/truck.svg',
+                },
+                {
+                  heading: '2. Thousands of trusted dealers will compete to buy your car',
+                  description: 'Our nationwide network of dealers will make their best offers in our auctions.',
+                  icon: 'images/tag.svg',
+                },
+                {
+                  heading: '3. Easy payment and free collection',
+                  description: 'Once the auction is up your car will be sold to the winning dealer. They’ll collect it at a time that suits and pay you right away!',
+                  icon: 'images/cash.svg',
+                },
+              ]
+            }">
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-16 py-16">
+              <!-- POINT -->
+              <template
+                x-for="(point, index) in howTo"
+                :key="index">
+                <div
+                  class="flex flex-col gap-4 text-center justify-start items-center px-4">
+                  <!-- ICON -->
+                  <span class="flex items-center justify-center">
+                    <img
+                      :src="point.icon"
+                      :alt="point.heading"
+                      :title="point.heading" />
+                  </span>
+                  <h3
+                    class="font-semibold text-textDarkGrey text-lg lg:text-xl"
+                    x-text="point.heading"></h3>
+                  <p
+                    class="text-textLightGrey text-sm md:text-base"
+                    x-text="point.description"></p>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- HOW TO SELL SECTION END -->
+
+      <!-- VIDEO SECTION START -->
+      <section
+        x-data="{
+        openVideo: false,
+        videoSrc: 'https://www.youtube.com/embed/glfLSI4mC2I?rel=0&amp;autoplay=1&amp;modestbranding=1&amp;enablejsapi=1'
+        }">
+        <div
+          class="container mx-auto px-[15px] xl:max-w-[1200px] py-20"
+          x-data="{
+            playBtnHovered: false,
+
+            setPlayBtnHovered: function(boolean) {
+              this.playBtnHovered = boolean;
+            }
+          }"
+          x-init="function() {
+            const style = document.createElement('style');
+          
+            style.textContent = `
+              @keyframes pulse-border {
+                0% {
+                  transform: scale(1);
+                  opacity: 1;
+                }
+      
+                100% {
+                  transform: scale(1.5);
+                  opacity: 0;
+                }
+              }
+      
+              @keyframes pulse-border-2 {
+                0% {
+                  transform: scale(1);
+                  opacity: 1;
+                }
+      
+                100% {
+                  transform: scale(1.3);
+                  opacity: 0;
+                }
+              }
+            `;
+        
+            document.head.appendChild(style);
+          }">
+          <div class="relative mx-auto flex justify-center">
+            <!-- VIDEO THUMBNAIL -->
+            <img
+              src="images/sell-my-car-video-thumbnail.jpg"
+              @click="openVideo = !openVideo"
+              @mouseover="setPlayBtnHovered(true)"
+              @mouseout="setPlayBtnHovered(false)"
+              alt=""
+              class="w-full md:w-[60%] h-auto cursor-pointer" />
+
+            <!-- PLAY BUTTON -->
+            <button
+              class="absolute top-1/2 left-1/2 block rounded-full border-0 w-[70px] h-[70px] lg:w-[113px] lg:h-[113px] text-center bg-[#ff0020] -translate-x-1/2 -translate-y-1/2 transition-all duration-[350ms] ease-linear before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:border before:border-white before:rounded-full before:opacity-0 before:animate-[pulse-border_1.5s_linear_infinite] after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:border after:border-white after:rounded-full after:opacity-0 after:animate-[pulse-border-2_1s_linear_infinite]">
+              <!-- ICON -->
+              <span
+                :class="playBtnHovered ? 'text-[#151515]' : 'text-white'"
+                class="absolute top-1/2 left-1/2 inline-block text-[24px] -translate-x-1/2 -translate-y-1/2 transition-color duration-300 ease-linear">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6">
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                    clip-rule="evenodd" />
+                </svg>
+              </span>
+            </button>
+
+            <!-- HOW TO SELL -->
+            <span
+              class="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 w-full md:w-[60%] py-2 md:py-4 bg-[#ff0020] text-white text-base md:text-lg font-semibold block text-center">
+              How to sell your car
+            </span>
+          </div>
+
+          <!-- VIDEO MODAL -->
+          <div
+            x-show="openVideo"
+            class="fixed top-0 left-0 bottom-0 right-0 bg-black/90 transition-all duration-300 ease-[ease] z-[100] flex items-center justify-center cursor-pointer"
+            style="display: none">
+            <div class="container max-w-4xl mx-auto px-6 py-4">
+              <div class="text-white flex justify-end mb-6">
+                <svg
+                  @click="openVideo = !openVideo"
+                  class="w-4 h-4 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 27.12 27.12">
+                  <title>Asset 9</title>
+                  <g
+                    id="Layer_2"
+                    data-name="Layer 2">
+                    <g
+                      id="Layer_1-2"
+                      data-name="Layer 1">
+                      <rect
+                        x="12.06"
+                        y="-4.12"
+                        width="3"
+                        height="35.36"
+                        transform="translate(-5.62 13.56) rotate(-45)"></rect>
+                      <rect
+                        x="-4.12"
+                        y="12.06"
+                        width="35.36"
+                        height="3"
+                        transform="translate(-5.62 13.56) rotate(-45)"></rect>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <div
+                @click.outside="openVideo = false"
+                class="aspect-video">
+                <iframe
+                  id="youtube-player"
+                  class="w-full h-full border-0"
+                  :src="videoSrc"
+                  allowfullscreen="true"
+                  data-gtm-yt-inspected-6952761_190="true"
+                  title="Tasks: An easier way to turn to-do into done"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- VIDEO SECTION END -->
+
+      <!-- WHY MOBWOW SECTION START -->
+      <section>
+        <div
+          class="container mx-auto px-[15px] xl:max-w-[1200px] pb-24">
+          <!-- SECTION HEADING BOX -->
+          <div
+            class="lg:pt-10 pt-4 flex flex-col text-left items-start">
+            <!-- SECTION HEADING -->
+            <h2
+              class="max-w-[33.75rem] text-3xl sm:text-4xl md:text-[2.7rem] !leading-tight lg:max-w-[45.625rem] text-black mb-2">
+              Why sell your used car with mobwow
+            </h2>
+            <!-- DIVIDER -->
+            <hr
+              class="w-12 h-1.5 rounded-full border-none mb-6 bg-[#ff0020]" />
+          </div>
+
+          <!-- SECTION CONTENT -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-9 mt-10 font-['Roboto']"
+            x-data="{
+              whyMobwow: [
+                {
+                  heading: `We check thousands of dealers`,
+                  description: `We save you the bother of hunting around for the best price to sell your old car`,
+                },
+                {
+                  heading: `Dealers compete to buy your car`,
+                  description: `We make the process of selling a car to a dealer easier. Any buyers who are interested in bidding will offer you their best price`,
+                },
+                {
+                  heading: `You will sell your car online for free`,
+                  description: `No fees. No hidden costs. All the money from the sale is yours to spend how you want`,
+                },
+                {
+                  heading: `Avoid the hassle of the private sale`,
+                  description: `Skip the struggle of selling a vehicle privately. You may also get more for it than if you were to try part exchange`,
+                },
+                {
+                  heading: `Sell your car for what it's really worth`,
+                  description: `Get a realistic valuation of your car's worth, not an automated price to be chipped down later`,
+                },
+                {
+                  heading: `Sell your car fast and get paid the same day`,
+                  description: `The chosen dealer will contact you to make payment and arrange free home collection`,
+                },
+                {
+                  heading: `Buy and sell your car in one place`,
+                  description: `We can also help you find your next car to buy, without the hassle or haggle`,
+                },
+                {
+                  heading: `Outstanding finance cars accepted`,
+                  description: `We can help you sell your car even if it has outstanding finance to settle`,
+                },
+              ]
+            }">
+            <!-- POINT -->
+            <template
+              x-for="(point, index) in whyMobwow"
+              :key="index">
+              <div>
+                <!-- HEADING -->
+                <div
+                  class="text-lg leading-7 text-[#000000de] flex items-center">
+                  <span
+                    class="flex items-center justify-center bg-[#03a561] mr-2 rounded-full p-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="w-4 h-4 fill-white">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </span>
+                  <h4
+                    class="font-bold text-lg lg:text-xl"
+                    x-text="point.heading"></h4>
+                </div>
+                <p
+                  class="text-[#000000de] text-base pl-[32px] mt-2.5 max-w-[29rem]"
+                  x-text="point.description"></p>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+      <!-- WHY MOBWOW SECTION END -->
+
+      <!-- HOW MUCH SECTION START -->
+      <section>
+        <div
+          class="container mx-auto px-[15px] xl:max-w-[1200px] pb-24">
+          <!-- SECTION HEADING BOX -->
+          <div
+            class="lg:pt-10 pt-4 flex flex-col text-left items-start">
+            <!-- SECTION HEADING -->
+            <h2
+              class="max-w-[33.75rem] text-3xl sm:text-4xl md:text-[2.7rem] !leading-tight lg:max-w-[45.625rem] text-black mb-2">
+              How much can I sell my car for?
+            </h2>
+            <!-- DIVIDER -->
+            <hr
+              class="w-12 h-1.5 rounded-full border-none mb-6 bg-[#ff0020]" />
+          </div>
+
+          <!-- SECTION CONTENT -->
+          <div class="mt-10 max-w-5xl">
+            <p class="text-lg my-9 text-[#000000de]">
+              How much you’ll be able to sell your car for is
+              determined by a number of factors.
+            </p>
+            <p class="text-lg my-9 text-[#000000de]">
+              First of all, it will depend on the model of your car.
+              It’s no secret that some cars are more valuable than
+              others. As a general rule, the more expensive your car
+              was new, the higher a price it will likely command
+              compared with similarly-aged cars.
+            </p>
+            <p class="text-lg my-9 text-[#000000de]">
+              Perhaps as equal will be the condition of your car. It
+              almost goes without saying, but the better shape a car
+              is in, the more it’ll be worth.
+            </p>
+            <p class="text-lg my-9 text-[#000000de]">
+              However, no matter the state of your car, it’s worth
+              providing clear images and as much information as
+              possible. A car that’s a little more worn down but with
+              lots of details and clear pictures may catch the eye
+              more of a buyer than what may be a perfect car that’s
+              been listed with bad images and little-to-no info about
+              it.
+            </p>
+            <p class="text-lg my-9 text-[#000000de]">
+              If you provide clear info at the point of listing your
+              car through carwow as well, you can expect to be paid
+              the price you’re offered.
+            </p>
+            <p class="text-lg my-9 text-[#000000de]">
+              <a
+                href="#"
+                class="text-[#ff0020] underline">
+                83% of customers</a
+              >
+              surveyed got their best price on carwow* but failing to
+              mention any damage or other issues with your car could
+              affect your valuation at the point of sale.
+            </p>
+            <p class="text-lg my-9 text-[#000000de]">
+              Make sure you can provide as much information on your
+              car’s service history as well, too. Strong service
+              history can add lots of value to your car, so being able
+              to back it up with stamps and receipts always helps.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- HOW MUCH SECTION END -->
+
+      <!-- FAQ SECTION START -->
+      <section class="">
+        <div
+          class="container mx-auto px-[15px] xl:max-w-[1200px] pb-24 font-['Roboto']">
+          <!-- SECTION HEADING BOX -->
+          <div
+            class="lg:pt-10 pt-4 flex flex-col text-left items-start">
+            <!-- SECTION HEADING -->
+            <h2
+              class="max-w-[33.75rem] text-3xl sm:text-4xl md:text-[2.7rem] !leading-tight lg:max-w-[45.625rem] text-black mb-2">
+              Selling your car FAQs
+            </h2>
+            <!-- DIVIDER -->
+            <hr
+              class="w-12 h-1.5 rounded-full border-none mb-6 bg-[#ff0020]" />
+          </div>
+          <!-- FAQs -->
+          <div
+            class="mt-10"
+            x-data="{selected: null}">
+            <ul
+              class="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
+              <!-- FAQ -->
+              <li
+                class="relative border rounded-md border-gray-200 transition-all duration-300"
+                :class="{ 'bg-gray-100': selected == 1 }">
+                <button
+                  type="button"
+                  class="w-full px-4 py-3"
+                  @click="selected !== 1 ? selected = 1 : selected = null">
+                  <div
+                    class="flex items-center text-left justify-between">
+                    <span class="text-base">
+                      How long does it take to sell through mobwow?
+                    </span>
+                    <span class="text-[#ff0020]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 transition-all duration-300"
+                        :class="{ 'rotate-180': selected === 1 }">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all max-h-0 duration-700"
+                  x-bind:style="selected == 1 ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
+                  <div class="pb-8 pt-5 flex flex-col gap-y-5">
+                    <p class="px-8 text-[#545454] text-sm">
+                      Selling your car through carwow is quick and
+                      easy. We need a few photos and a few details and
+                      we’ll do the rest.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      Your car will be advertised to thousands of
+                      local and national dealers in our daily online
+                      auction - they’ll submit their bids by 3.30 pm
+                      that day.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If your reserve price is met or exceeded on the
+                      day your car will be sold to the winning dealer
+                      - they’ll then arrange collection at a time and
+                      place that suits you.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If your car isn’t sold in the sale, it’ll be
+                      advertised for another 2 days, so there are
+                      plenty of opportunities for our dealers to make
+                      their best offers - and our team will be on hand
+                      every step of the way to help.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- FAQ -->
+              <li
+                class="relative border rounded-md border-gray-200 transition-all duration-300"
+                :class="{ 'bg-gray-100': selected == 2 }">
+                <button
+                  type="button"
+                  class="w-full px-4 py-3"
+                  @click="selected !== 2 ? selected = 2 : selected = null">
+                  <div
+                    class="flex items-center text-left justify-between">
+                    <span class="text-base">
+                      How does carwow compare to selling a car
+                      privately?
+                    </span>
+                    <span class="text-[#ff0020]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 transition-all duration-300"
+                        :class="{ 'rotate-180': selected === 2 }">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all max-h-0 duration-700"
+                  x-bind:style="selected == 2 ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
+                  <div class="pb-8 pt-5 flex flex-col gap-y-5">
+                    <p class="px-8 text-[#545454] text-sm">
+                      With a private sale, you pay a little to place
+                      an advert on a classified website and hope it
+                      will be spotted by a potential buyer. You then
+                      arrange for them to come to you to view and test
+                      drive the car. You agree on a price, they pay
+                      you and then they drive the car away.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      This method is for those who don’t mind having
+                      potential customers come to their house and is
+                      the method that could get you the most cash for
+                      your car.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      However, there’s no guarantee on how long it
+                      could take and how much cash you’ll end up
+                      getting. It could also be a lot more time
+                      consuming for you as a seller. Using carwow’s
+                      services to sell your car takes away this hassle
+                      and uncertainty.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      For more on this see our guide on the
+                      <a
+                        href="#"
+                        class="text-[#ff0020] underline">
+                        best ways to sell a car.</a
+                      >
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- FAQ -->
+              <li
+                class="relative border rounded-md border-gray-200 transition-all duration-300"
+                :class="{ 'bg-gray-100': selected == 3 }">
+                <button
+                  type="button"
+                  class="w-full px-4 py-3"
+                  @click="selected !== 3 ? selected = 3 : selected = null">
+                  <div
+                    class="flex items-center text-left justify-between">
+                    <span class="text-base">
+                      How is mobwow different to other car selling
+                      sites?
+                    </span>
+                    <span class="text-[#ff0020]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 transition-all duration-300"
+                        :class="{ 'rotate-180': selected === 3 }">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all max-h-0 duration-700"
+                  x-bind:style="selected == 3 ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
+                  <div class="pb-8 pt-5 flex flex-col gap-y-5">
+                    <p class="px-8 text-[#545454] text-sm">
+                      We’re easy, free and here to get you the best
+                      price for your car.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      Unlike listing privately, you don’t have to pay,
+                      you don’t have to write an advert and you don’t
+                      have to make time for viewings - it’s all done
+                      online, with just a few pictures and a few
+                      details.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      Your car will go up for auction and our dealers
+                      will compete with their best offers to buy it.
+                      Our auctions are held between 8 am and 3.30 pm
+                      Monday to Saturday.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      Once sold they’ll collect at a time that suits
+                      you and you’ll be paid on the same day. It’s as
+                      easy as that.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- FAQ -->
+              <li
+                class="relative border rounded-md border-gray-200 transition-all duration-300"
+                :class="{ 'bg-gray-100': selected == 4 }">
+                <button
+                  type="button"
+                  class="w-full px-4 py-3"
+                  @click="selected !== 4 ? selected = 4 : selected = null">
+                  <div
+                    class="flex items-center text-left justify-between">
+                    <span class="text-base">
+                      What paperwork do I need to sell my car?
+                    </span>
+                    <span class="text-[#ff0020]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 transition-all duration-300"
+                        :class="{ 'rotate-180': selected === 4 }">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all max-h-0 duration-700"
+                  x-bind:style="selected == 4 ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
+                  <div class="pb-8 pt-5 flex flex-col gap-y-5">
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll just need your V5C logbook to sell my
+                      car, though what you do with it depends on if
+                      the car you're selling is staying in the UK or
+                      heading abroad.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you're selling your car through carwow, the
+                      buyer will be UK based. This means you’ll just
+                      need to hand over the green 'new keeper' slip
+                      from inside the logbook.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll need to then tell the DVLA you’ve sold
+                      the car, along with the details of the buyer. If
+                      you don't, you might not get the full
+                      entitlement of any car tax refund you're due.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you do sell the car to a buyer that’s taking
+                      it abroad, you'll need to fill out the
+                      'permanent export' section of the V5C and send
+                      it off to the DVLA including a letter with the
+                      buyer’s name and address.
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- FAQ -->
+              <li
+                class="relative border rounded-md border-gray-200 transition-all duration-300"
+                :class="{ 'bg-gray-100': selected == 5 }">
+                <button
+                  type="button"
+                  class="w-full px-4 py-3"
+                  @click="selected !== 5 ? selected = 5 : selected = null">
+                  <div
+                    class="flex items-center text-left justify-between">
+                    <span class="text-base">
+                      Can I part exchange my car through mobwow?
+                    </span>
+                    <span class="text-[#ff0020]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 transition-all duration-300"
+                        :class="{ 'rotate-180': selected === 5 }">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all max-h-0 duration-700"
+                  x-bind:style="selected == 5 ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
+                  <div class="pb-8 pt-5 flex flex-col gap-y-5">
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll just need your V5C logbook to sell my
+                      car, though what you do with it depends on if
+                      the car you're selling is staying in the UK or
+                      heading abroad.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you're selling your car through carwow, the
+                      buyer will be UK based. This means you’ll just
+                      need to hand over the green 'new keeper' slip
+                      from inside the logbook.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll need to then tell the DVLA you’ve sold
+                      the car, along with the details of the buyer. If
+                      you don't, you might not get the full
+                      entitlement of any car tax refund you're due.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you do sell the car to a buyer that’s taking
+                      it abroad, you'll need to fill out the
+                      'permanent export' section of the V5C and send
+                      it off to the DVLA including a letter with the
+                      buyer’s name and address.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- FAQ -->
+              <li
+                class="relative border rounded-md border-gray-200 transition-all duration-300"
+                :class="{ 'bg-gray-100': selected == 6 }">
+                <button
+                  type="button"
+                  class="w-full px-4 py-3"
+                  @click="selected !== 6 ? selected = 6 : selected = null">
+                  <div
+                    class="flex items-center text-left justify-between">
+                    <span class="text-base">
+                      Can I sell my car to a dealer through mobwow?
+                    </span>
+                    <span class="text-[#ff0020]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 transition-all duration-300"
+                        :class="{ 'rotate-180': selected === 6 }">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all max-h-0 duration-700"
+                  x-bind:style="selected == 6 ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
+                  <div class="pb-8 pt-5 flex flex-col gap-y-5">
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll just need your V5C logbook to sell my
+                      car, though what you do with it depends on if
+                      the car you're selling is staying in the UK or
+                      heading abroad.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you're selling your car through carwow, the
+                      buyer will be UK based. This means you’ll just
+                      need to hand over the green 'new keeper' slip
+                      from inside the logbook.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll need to then tell the DVLA you’ve sold
+                      the car, along with the details of the buyer. If
+                      you don't, you might not get the full
+                      entitlement of any car tax refund you're due.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you do sell the car to a buyer that’s taking
+                      it abroad, you'll need to fill out the
+                      'permanent export' section of the V5C and send
+                      it off to the DVLA including a letter with the
+                      buyer’s name and address.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- FAQ -->
+              <li
+                class="relative border rounded-md border-gray-200 transition-all duration-300"
+                :class="{ 'bg-gray-100': selected == 7 }">
+                <button
+                  type="button"
+                  class="w-full px-4 py-3"
+                  @click="selected !== 7 ? selected = 7 : selected = null">
+                  <div
+                    class="flex items-center text-left justify-between">
+                    <span class="text-base">
+                      Who will buy my car?
+                    </span>
+                    <span class="text-[#ff0020]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 transition-all duration-300"
+                        :class="{ 'rotate-180': selected === 7 }">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all max-h-0 duration-700"
+                  x-bind:style="selected == 7 ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
+                  <div class="pb-8 pt-5 flex flex-col gap-y-5">
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll just need your V5C logbook to sell my
+                      car, though what you do with it depends on if
+                      the car you're selling is staying in the UK or
+                      heading abroad.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you're selling your car through carwow, the
+                      buyer will be UK based. This means you’ll just
+                      need to hand over the green 'new keeper' slip
+                      from inside the logbook.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll need to then tell the DVLA you’ve sold
+                      the car, along with the details of the buyer. If
+                      you don't, you might not get the full
+                      entitlement of any car tax refund you're due.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you do sell the car to a buyer that’s taking
+                      it abroad, you'll need to fill out the
+                      'permanent export' section of the V5C and send
+                      it off to the DVLA including a letter with the
+                      buyer’s name and address.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- FAQ -->
+              <li
+                class="relative border rounded-md border-gray-200 transition-all duration-300"
+                :class="{ 'bg-gray-100': selected == 8 }">
+                <button
+                  type="button"
+                  class="w-full px-4 py-3"
+                  @click="selected !== 8 ? selected = 8 : selected = null">
+                  <div
+                    class="flex items-center text-left justify-between">
+                    <span class="text-base">
+                      How can I sell my car fast?
+                    </span>
+                    <span class="text-[#ff0020]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 transition-all duration-300"
+                        :class="{ 'rotate-180': selected === 8 }">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all max-h-0 duration-700"
+                  x-bind:style="selected == 8 ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
+                  <div class="pb-8 pt-5 flex flex-col gap-y-5">
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll just need your V5C logbook to sell my
+                      car, though what you do with it depends on if
+                      the car you're selling is staying in the UK or
+                      heading abroad.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you're selling your car through carwow, the
+                      buyer will be UK based. This means you’ll just
+                      need to hand over the green 'new keeper' slip
+                      from inside the logbook.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      You'll need to then tell the DVLA you’ve sold
+                      the car, along with the details of the buyer. If
+                      you don't, you might not get the full
+                      entitlement of any car tax refund you're due.
+                    </p>
+                    <p class="px-8 text-[#545454] text-sm">
+                      If you do sell the car to a buyer that’s taking
+                      it abroad, you'll need to fill out the
+                      'permanent export' section of the V5C and send
+                      it off to the DVLA including a letter with the
+                      buyer’s name and address.
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- FAQ SECTION END -->
+    </main>
+    <!-- MAIN CONTAINER END -->
+    <!-- FOOTER SECTION START -->
+    <footer class="bg-[#343434] text-[#777] text-sm py-10">
+      <div
+        class="container mx-auto px-[15px] xl:max-w-[1200px] font-['Roboto']">
+        <nav class="lg:flex lg:flex-wrap lg:space-x-16 mb-3">
+          <div class="mb-6 grow">
+            <p class="font-bold mb-4 text-base">Getting Started</p>
+            <ul>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Get Funded</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >How To Invest</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Pricing</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Sign up</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Log In</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="mb-6 grow">
+            <p class="font-bold mb-4 text-base">Browse</p>
+            <ul>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Browse Companies</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Companies</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >People</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="mb-6 grow">
+            <p class="font-bold mb-4 text-base">Legal</p>
+            <ul>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Terms of Use</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="mb-6 grow">
+            <p class="font-bold mb-4 text-base">Crowdfunder</p>
+            <ul>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >About</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Blog</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Press</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Sitemap</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Support</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="mb-6 grow">
+            <p class="font-bold mb-4 text-base">Learn</p>
+            <ul>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Investment Crowdfunding</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Successfully Raise Investment</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Entrepreneur FAQ</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Investor FAQ</a
+                >
+              </li>
+              <li
+                class="text-sm text-[#bbb] hover:text-[#ff0020] transition-all mb-2">
+                <a
+                  class="text-current"
+                  href=""
+                  >Knowledge Center</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div
+          class="flex flex-col lg:flex-row justify-center lg:justify-between gap-3 text-sm border-y border-[#444] py-5 mb-5">
+          <div class="w-24 mx-auto lg:m-0">
+            <a
+              href="#"
+              class="block w-full h-full hover:opacity-75 transition-all">
+              <img
+                src="images/mobWOW-Base-Logo-Red (2) - light.svg"
+                class="max-w-full h-auto"
+                alt="" />
+            </a>
+          </div>
+          <p class="text-center text-white/80">
+            © 2023 mobWOW.com All rights reserved.
+          </p>
+        </div>
+        <p class="text-xs">
+          DISCLOSURE: Crowdfunder.com is a website owned and operated
+          by Crowdfunder, Inc. ("Crowdfunder"). By accessing this
+          website or any page thereof, you agree to be bound by the
+          Terms of Use and Privacy Policy, as amended from time to
+          time and in effect at the most recent time you access this
+          website or any page thereof. Nothing on this website shall
+          constitute an offer to sell, or a solicitation of an offer
+          to subscribe for or buy, any securities to any person in any
+          jurisdiction to whom or in which such offer or solicitation
+          is unlawful. Consequently, any featured, front page or
+          prominent placement of a listed company on this site is not
+          deemed to be a recommendation and may be based on various
+          algorithms or selections that drive traffic to such listed
+          company. Crowdfunder does not effect securities
+          transactions, give investment advice or recommend any
+          securities as it is not registered as a broker-dealer,
+          funding portal or investment adviser with the U.S.
+          Securities and Exchange Commission or the securities
+          regulatory commission, agency or body of any state of the
+          United States or any non-U.S. jurisdiction. As such,
+          Crowdfunder is not acting in a fiduciary capacity with
+          respect to any user of the Crowdfunder services, and
+          Crowdfunder disclaims any broker-client or advisor-client
+          relationship with respect to any party using those services.
+          Listed companies are actively seeking to raise early stage
+          capital pursuant to Rule 506(b) or Rule 506(c) of Regulation
+          D ("Regulation D") under the U.S. Securities Act of 1933, as
+          amended (the "Securities Act"), or pursuant to Regulation A
+          (sometimes referred to as "Regulation A+") under the
+          Securities Act ("Regulation A"). A listed company’s
+          offerings are being made by, and all the information
+          included on this website relating to a listed company and
+          its securities has been provided by and is the
+          responsibility of, such listed company. A listed company’s
+          offerings on this website, if made pursuant to Rule 506(b)
+          or Rule 506(c) of Regulation D, generally are available only
+          to "accredited investors" as defined in Regulation D.
+          Accredited investors are able to identify listed companies
+          in which they may have an interest after a certification
+          process for Rule 506(b) offerings, while Rule 506(c)
+          offerings are available for the general public to view.
+          Offerings made pursuant to Regulation A are also generally
+          available for the general public to view. Investing in
+          securities, particularly in securities issued by start-up
+          companies, involves substantial risk, and investors should
+          be able to bear the loss of their entire investment. All
+          investors should make their own determination of whether or
+          not to make any investment based on their own independent
+          evaluation and analysis. Crowdfunder does not verify or
+          assure that information provided by any listed company
+          offering its securities is accurate or complete or that the
+          valuation of such securities is appropriate. Neither
+          Crowdfunder nor any of its directors, officers, employees,
+          representatives, affiliates or agents shall have any
+          liability whatsoever arising from any error or
+          incompleteness of fact or opinion in, or lack of care in the
+          preparation of, any of the materials posted on this website.
+          Crowdfunder does not provide legal, accounting or tax
+          advice. Any representation or implication to the contrary is
+          expressly disclaimed.
+          <br />
+          <br />
+          You can learn more about investing in Regulation D and
+          Regulation A offerings from the SEC or FINRA.
+        </p>
+      </div>
+    </footer>
+    <!-- FOOTER SECTION END -->
+  </body>
+</html>
